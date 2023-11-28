@@ -1,34 +1,44 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Avatar, Dropdown } from 'flowbite-react';
 
 function ProfileMenu() {
+  const {setAuthorDashboardOpen}=useContext(AuthorAuthContext);
+  const navigate=useNavigate()
+  const HandleDashboard =()=>{
+    setAuthorDashboardOpen(true);
+navigate('/dashboard');
+  }
   return (
-    <Dropdown
-      label={<Avatar alt="User settings" img="https://cdn3.vectorstock.com/i/1000x1000/30/97/flat-business-man-user-profile-avatar-icon-vector-4333097.jpg" rounded />}
-      arrowIcon={false}
-      inline
-    >
-      <Dropdown.Header>
-        <span className="block text-sm">Bonnie Green</span>
-        <span className="block truncate text-sm font-medium">name@flowbite.com</span>
-      </Dropdown.Header>
-      <Dropdown.Item>Dashboard</Dropdown.Item>
-      <Dropdown.Item>Settings</Dropdown.Item>
-      <Dropdown.Item>Earnings</Dropdown.Item>
-      <Dropdown.Divider />
-      <Dropdown.Item>Sign out</Dropdown.Item>
-    </Dropdown>
+   <div>
+      <Dropdown
+        label={<Avatar alt="User settings" img="https://cdn3.vectorstock.com/i/1000x1000/30/97/flat-business-man-user-profile-avatar-icon-vector-4333097.jpg" rounded />}
+        arrowIcon={false}
+        inline
+        style={{zIndex:"99"}} >
+        <Dropdown.Header >
+          <span className="block text-sm">Bonnie Green</span>
+          <span className="block truncate text-sm font-medium">name@flowbite.com</span>
+        </Dropdown.Header >
+        <Dropdown.Item ><button onClick={()=>HandleDashboard()}>Dashboard</button></Dropdown.Item>
+        <Dropdown.Item>Settings</Dropdown.Item>
+        <Dropdown.Item>Earnings</Dropdown.Item>
+        <Dropdown.Divider />
+        <Dropdown.Item>Sign out</Dropdown.Item>
+      </Dropdown>
+   </div>
   );
 }
 
 
 import NavBarSecond from "./NavBar";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthorAuthContext } from "../../ContextApi/AuthorContext";
 export default function Header() {
 
   return (
       <>
   {/* ========== HEADER ========== */}
-  <header className="flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full bg-gray-900 border-b border-gray-700 text-sm py-2.5 sm:py-4">
+  <header style={{zIndex:"99"}} className="flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full bg-gray-900 border-b border-gray-700 text-sm py-2.5 sm:py-4">
     <nav
       className="max-w-7xl flex basis-full items-center w-full mx-auto px-4 sm:px-6 lg:px-8"
       aria-label="Global"
@@ -122,8 +132,7 @@ export default function Header() {
           </button>
         
           <div
-            className="hs-dropdown relative inline-flex"
-            data-hs-dropdown-placement="bottom-right"
+        
           >
             {/* <button
               id="hs-dropdown-with-header"

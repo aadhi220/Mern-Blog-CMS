@@ -3,6 +3,7 @@ import HeroSection from '../Components/HeroSection'
 
 
 function Home() {
+  
   return (
 <div className='px-[3rem] py-10'>
   

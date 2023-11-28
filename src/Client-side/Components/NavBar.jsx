@@ -2,8 +2,9 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 function NavBarSecond() {
+  
   return (
-    <nav style={{zIndex:"99"}}
+    <nav style={{zIndex:"1"}}
     className=" sticky -top-px bg-white text-sm font-medium text-black ring-1 ring-gray-900 ring-opacity-5 border-t shadow-sm shadow-gray-100 pt-6 md:pb-6 -mt-px dark:bg-slate-900 dark:border-gray-800 dark:shadow-slate-700/[.7]"
     aria-label="Jump links"
   >
