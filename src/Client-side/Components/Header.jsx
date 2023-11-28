@@ -2,12 +2,9 @@ import React, { useContext } from "react";
 import { Avatar, Dropdown } from 'flowbite-react';
 
 function ProfileMenu() {
-  const {setAuthorDashboardOpen}=useContext(AuthorAuthContext);
-  const navigate=useNavigate()
-  const HandleDashboard =()=>{
-    setAuthorDashboardOpen(true);
-navigate('/dashboard');
-  }
+  const {isAuthor}=useContext(AuthorAuthContext);
+
+
   return (
    <div>
       <Dropdown
@@ -19,7 +16,7 @@ navigate('/dashboard');
           <span className="block text-sm">Bonnie Green</span>
           <span className="block truncate text-sm font-medium">name@flowbite.com</span>
         </Dropdown.Header >
-        <Dropdown.Item ><button onClick={()=>HandleDashboard()}>Dashboard</button></Dropdown.Item>
+        <Dropdown.Item ><Link to={'/authorBase'}>Dashboard</Link></Dropdown.Item>
         <Dropdown.Item>Settings</Dropdown.Item>
         <Dropdown.Item>Earnings</Dropdown.Item>
         <Dropdown.Divider />
@@ -31,7 +28,7 @@ navigate('/dashboard');
 
 
 import NavBarSecond from "./NavBar";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AuthorAuthContext } from "../../ContextApi/AuthorContext";
 export default function Header() {
 
