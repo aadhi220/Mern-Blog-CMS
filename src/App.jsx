@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import './App.css'
-import { Routes ,Route} from 'react-router-dom'
+import { Routes ,Route,Navigate} from 'react-router-dom'
 
 import { AuthorAuthContext } from './ContextApi/AuthorContext'
 
@@ -11,6 +11,7 @@ import AuthorBase from './Author-side/Pages/AuthorBase'
 
 function App() {
 const {isAuthor} = useContext(AuthorAuthContext)
+
  
   return (
     <>
@@ -19,10 +20,11 @@ const {isAuthor} = useContext(AuthorAuthContext)
   
   <Routes>
    {/* client side  */}
-   <Route path="*" element={<ClientBase />} />
-   <Route path="/authorBase/*" element={<AuthorBase/>} />
+   <Route path="*" element ={<ClientBase />} />
 
-   
+   <Route path="/dashboard/*" element={<AuthorBase/>} />
+
+   <Route path="/AuthorDashboard" element={<Navigate to="/dashboard/home" replace /> } />
 
 
 

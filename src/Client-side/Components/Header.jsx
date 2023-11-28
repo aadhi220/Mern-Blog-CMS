@@ -16,7 +16,7 @@ function ProfileMenu() {
           <span className="block text-sm">Bonnie Green</span>
           <span className="block truncate text-sm font-medium">name@flowbite.com</span>
         </Dropdown.Header >
-        <Dropdown.Item ><Link to={'/authorBase'}>Dashboard</Link></Dropdown.Item>
+        <Dropdown.Item ><Link to={'/AuthorDashboard'}>Dashboard</Link></Dropdown.Item>
         <Dropdown.Item>Settings</Dropdown.Item>
         <Dropdown.Item>Earnings</Dropdown.Item>
         <Dropdown.Divider />
