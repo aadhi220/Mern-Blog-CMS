@@ -17,7 +17,7 @@ import { twMerge } from 'tailwind-merge';
 
  export default function AuthorSidebar() {
   return (
-    <Sidebar  className='fixed hidden md:block rounded-none bg-black'  >
+    <Sidebar  className='fixed hidden lg:block rounded-none bg-black'  >
       
       <Sidebar.Items  >
         <Sidebar.ItemGroup>

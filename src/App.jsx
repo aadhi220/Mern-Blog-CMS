@@ -6,6 +6,10 @@ import { AuthorAuthContext } from './ContextApi/AuthorContext'
 
 import ClientBase from './Client-side/Pages/ClientBase'
 import AuthorBase from './Author-side/Pages/AuthorBase'
+import Login from './Auth/Login'
+import Register from './Auth/Register'
+import { ToastContainer } from 'react-toastify'
+
 
 
 
@@ -25,6 +29,8 @@ const {isAuthor} = useContext(AuthorAuthContext)
    <Route path="/dashboard/*" element={<AuthorBase/>} />
 
    <Route path="/AuthorDashboard" element={<Navigate to="/dashboard/home" replace /> } />
+   <Route path='/login' element={<Login/>} />
+   <Route path='/register' element={<Register/>} />
 
 
 
@@ -37,6 +43,20 @@ const {isAuthor} = useContext(AuthorAuthContext)
   
 
 </div>
+<ToastContainer
+position="top-right"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="light"
+/>
+{/* Same as */}
+<ToastContainer />
     </>
   )
 }

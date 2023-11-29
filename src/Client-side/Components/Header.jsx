@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Avatar, Dropdown } from 'flowbite-react';
+import { Avatar, Button, Dropdown } from 'flowbite-react';
 
 function ProfileMenu() {
   const {isAuthor}=useContext(AuthorAuthContext);
@@ -30,8 +30,9 @@ function ProfileMenu() {
 import NavBarSecond from "./NavBar";
 import { Link } from "react-router-dom";
 import { AuthorAuthContext } from "../../ContextApi/AuthorContext";
+import { getTokenContext } from "../../ContextApi/TokenContext";
 export default function Header() {
-
+  const {token}=useContext(getTokenContext);
   return (
       <>
   {/* ========== HEADER ========== */}
@@ -245,7 +246,10 @@ export default function Header() {
                 </a>
               </div>
             </div> */}
-            <ProfileMenu/>
+            {token ?<ProfileMenu/> :
+            
+            <Link to={'/login'} className="text-white">Sign In</Link>
+            }
           </div>
         </div>
       </div>

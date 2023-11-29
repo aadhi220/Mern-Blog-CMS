@@ -1,13 +1,21 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import AuthorHeader from '../Components/AuthorHeader'
 import AuthorFooter from '../Components/AuthorFooter'
-import { Routes,Route } from 'react-router-dom'
+import { Routes,Route, useNavigate } from 'react-router-dom'
 import Dashboard from './Dashboard'
 import AuthorSidebar from '../Components/AuthorSidebar'
 import ManageUsers from './ManageUsers'
 import ManageBlog from './ManageBlog'
 import AddBlog from './AddBlog'
+import { getTokenContext } from '../../ContextApi/TokenContext'
 function AuthorBase() {
+  const navigate=useNavigate()
+  const {token}=useContext(getTokenContext)
+useEffect(()=>{
+  if(!token){
+    navigate('/')
+      }
+},[])
   return (
 
     <>
