@@ -3,18 +3,38 @@
 
 import { Button, Checkbox, Label, TextInput } from 'flowbite-react';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { HiMail } from "react-icons/hi";
+import { loginApi } from '../Services/AllAPI';
+import { toast} from "react-toastify"
 
 export default function Login() {
-    const [user, setUser] = useState("");
-    const [pass, setPass] = useState("");
+  const navigate=useNavigate()
+   const[userData,setUserData] = useState({
+    email:"",
+    password:"",
+   })
     const [showPassword,setShowPassword] =useState(false);
-    const HandleSubmit = (e) => {
+    const HandleSubmit =async (e) => {
         e.preventDefault();
-        if (user && pass ) {
-          alert(`    Name          : ${user} 
-          
-          password  : ${pass}`);
+        const {email,password} = userData
+        if (email && password ) {
+          try {
+            const result = await loginApi(userData)
+            if (result.status === 200) {
+              toast.success("Login successful")
+              sessionStorage.setItem("existingUser",JSON.stringify(result.data.existingUser))
+              sessionStorage.setItem("token",result.data.token)
+              navigate('/')
+              
+              
+            }else{
+              toast.error("Login failed")
+              console.log(result);
+            }
+          } catch (error) {
+            console.log(error);
+          }
         } else {
           alert("please fill completely!!");
         }
@@ -27,26 +47,40 @@ export default function Login() {
             </div>
         <div className="max-w-md">
       <div className="mb-2 block">
-        <Label htmlFor="username3" value="Username" />
+        <Label htmlFor="email4" value=" Your email" />
       </div>
-      <TextInput id="username3" placeholder="Bonnie Green" value={user ||""} onChange={(e)=>setUser(e.target.value)} addon="@" required />
+ 
+      <TextInput
+            id="email4"
+            type="email"
+            icon={HiMail}
+            placeholder="name@gmail.com"
+            value={userData.email ||""} onChange={(e)=>setUserData({...userData,email:e.target.value})}
+            required
+          />
     </div>
           <div>
             <div className="mb-2 block">
               <Label htmlFor="password1" value="Your password" />
             </div>
-            <TextInput id="password1" type={showPassword ? "text":"password"} value={pass ||""} onChange={(e)=>setPass(e.target.value)} required />
+            <TextInput id="password1" type={showPassword ? "text":"password"} value={userData.password ||""} onChange={(e)=>setUserData({...userData,password:e.target.value})} required />
           </div>
-          <div className="flex items-center gap-2">
-        <Checkbox id="pass" onChange={()=>setShowPassword(!showPassword)} />
-        <Label htmlFor="pass">Show Password</Label>
+          <div className="flex justify-between items-center gap-2">
+       <div className='flex  items-center gap-2'>
+          <Checkbox id="pass" onChange={()=>setShowPassword(!showPassword)} />
+          <Label htmlFor="pass">Show Password</Label>
+       </div>
+        <Link to={'/forgotPassword'} className='text-blue-700 hover:underline'>Forgot Password?</Link>
       </div>
           <div className="flex items-center gap-2">
           
-            <span>Don't have an account? </span><Link to={'/register'} className='text-blue-700 underline '>Sign up</Link>
+            <span>Don't have an account? </span><Link to={'/register'} className='text-blue-700 hover:underline '>Sign up</Link>
+            
           </div>
           <Button type="submit">Sign in</Button>
         </form>
+
+
    </div>
   );
 }

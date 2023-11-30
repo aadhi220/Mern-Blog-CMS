@@ -1,24 +1,25 @@
 import React, { createContext, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 
 export const getTokenContext=createContext()
 function TokenContext({children}) {
-const [token,setToken] =useState("")    
+  const navigate =useNavigate()
+const [token,setToken] =useState("")
+    
 
-    useEffect(()=>{
-        if(sessionStorage.getItem("token")){
-          setToken(sessionStorage.getItem("token"))
-        }else {
-          setToken("")
-        }
+
+
       
-        
-      },[])
+    const  handleSignOut=()=>{
+      setToken("")
       
-      
+      sessionStorage.clear()
+    }  
+
   return (
     <>
-    <getTokenContext.Provider value={{token,setToken}}>
+    <getTokenContext.Provider value={{token,handleSignOut,setToken}}>
 {children}
     </getTokenContext.Provider>
     

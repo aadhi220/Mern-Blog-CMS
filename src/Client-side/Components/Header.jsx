@@ -1,38 +1,17 @@
 import React, { useContext } from "react";
-import { Avatar, Button, Dropdown } from 'flowbite-react';
-
-function ProfileMenu() {
-  const {isAuthor}=useContext(AuthorAuthContext);
-
-
-  return (
-   <div>
-      <Dropdown
-        label={<Avatar alt="User settings" img="https://cdn3.vectorstock.com/i/1000x1000/30/97/flat-business-man-user-profile-avatar-icon-vector-4333097.jpg" rounded />}
-        arrowIcon={false}
-        inline
-        style={{zIndex:"99"}} >
-        <Dropdown.Header >
-          <span className="block text-sm">Bonnie Green</span>
-          <span className="block truncate text-sm font-medium">name@flowbite.com</span>
-        </Dropdown.Header >
-        <Dropdown.Item ><Link to={'/AuthorDashboard'}>Dashboard</Link></Dropdown.Item>
-        <Dropdown.Item>Settings</Dropdown.Item>
-        <Dropdown.Item>Earnings</Dropdown.Item>
-        <Dropdown.Divider />
-        <Dropdown.Item>Sign out</Dropdown.Item>
-      </Dropdown>
-   </div>
-  );
-}
 
 
 import NavBarSecond from "./NavBar";
 import { Link } from "react-router-dom";
 import { AuthorAuthContext } from "../../ContextApi/AuthorContext";
 import { getTokenContext } from "../../ContextApi/TokenContext";
+import ProfileMenu from "./ProfileMenu";
 export default function Header() {
   const {token}=useContext(getTokenContext);
+
+ 
+
+  console.log(token);
   return (
       <>
   {/* ========== HEADER ========== */}

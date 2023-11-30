@@ -10,12 +10,22 @@ import AddBlog from './AddBlog'
 import { getTokenContext } from '../../ContextApi/TokenContext'
 function AuthorBase() {
   const navigate=useNavigate()
-  const {token}=useContext(getTokenContext)
-useEffect(()=>{
-  if(!token){
-    navigate('/')
-      }
-},[])
+  const {token,setToken}=useContext(getTokenContext)
+
+  useEffect(()=>{
+    const user = JSON.parse(sessionStorage.getItem("existingUser"));
+    if(sessionStorage.getItem("token")){
+      setToken(sessionStorage.getItem("token"))
+    }else {
+      setToken("")
+      navigate("/")
+    }
+    if(!user.isAuthor){
+navigate('/')
+    }
+    
+  },[token])
+  
   return (
 
     <>

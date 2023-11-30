@@ -3,13 +3,13 @@ import {commonApi} from './commonApi'
 
 //register 
 
-export const registerApi =async(user)=>{
+export const registerApi =async (user)=>{
     return await commonApi('POST',`${SERVER_URL}/users/register`,user,"")
 }
 
 //login
 
-export const loginApi =async(user)=>{
+export const loginApi =async (user)=>{
     return await commonApi('POST',`${SERVER_URL}/users/login`,user,"")
 }
 
