@@ -15,33 +15,44 @@ export const loginApi =async (user)=>{
 
 
 //Admin Side
+export const addCategoryApi =async (reqBody,reqHeader)=>{
+    return await commonApi('POST',`${SERVER_URL}/category/add`,reqBody,reqHeader)
 
+}
+
+export const getAllCategoryApi =async(reqHeader)=>{
+    return await commonApi('GET',`${SERVER_URL}/category/all`,"",reqHeader)
+}
+
+export const deleteCategoryApi =async(categoryId,reqHeader)=>{
+    return await commonApi('DELETE',`${SERVER_URL}/category/delete/${categoryId}`,{},reqHeader)
+}
 
 //Authors Side
 
 //AddBlog
 export const addBlogApi =async(reqBody,reqHeader)=>{
-    return await commonApi('POST',`${SERVER_URL}blogs/add`,reqBody,reqHeader)
+    return await commonApi('POST',`${SERVER_URL}/blogs/add`,reqBody,reqHeader)
 }
 
 //Edit Blog
 export const editBlogApi =async(reqBody,reqHeader)=>{
-    return await commonApi('PUT',`${SERVER_URL}blogs/edit`,reqBody,reqHeader)
+    return await commonApi('PUT',`${SERVER_URL}/blogs/edit`,reqBody,reqHeader)
 }
 // delete Blog
 
 export const deleteBlogApi =async(blogId,reqHeader)=>{
-    return await commonApi('DELETE',`${SERVER_URL}blogs/delete/${blogId}`,{},reqHeader)
+    return await commonApi('DELETE',`${SERVER_URL}/blogs/delete/${blogId}`,{},reqHeader)
 }
 
 //common 
 
 export const getAllBlogApi =async(searchKey,reqHeader)=>{
-    return await commonApi('GET',`${SERVER_URL}blogs/all?search=${searchKey}`,"",reqHeader)
+    return await commonApi('GET',`${SERVER_URL}/blogs/all?search=${searchKey}`,"",reqHeader)
 }
 
 export const getBlogByIdApi =async(blogId,reqHeader)=>{
-    return await commonApi('GET',`${SERVER_URL}blogs/get/${blogId}`,"",reqHeader)
+    return await commonApi('GET',`${SERVER_URL}/blogs/get/${blogId}`,"",reqHeader)
 }
 
 

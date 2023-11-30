@@ -7,16 +7,9 @@ import { AuthorAuthContext } from "../../ContextApi/AuthorContext";
 export default  function AuthorProfileMenu() {
     
   const {handleSignOut}=useContext(getTokenContext)
-  const {isAuthor,setIsAuthor,isAdmin,setIsAdmin}=useContext(AuthorAuthContext)
+  const {isAuthor,setIsAuthor,isAdmin,setIsAdmin,userProfile,setUserProfile}=useContext(AuthorAuthContext)
   const [existingUser,setExistingUser]=useState("")
-  const [userProfile,setUserProfile]=useState({
-    username:"",
-    email:"",
-    password:"",
-    profilePic:"",
-    isAuthor:"",
-    isAdmin:"",
-  })
+
 
    
   useEffect(() => {
@@ -50,7 +43,7 @@ console.log(existingUser);
     return (
      <div>
         <Dropdown
-          label={<Avatar alt="User settings" img={userProfile.profilePic ? userProfile?.profilePic :"https://cdn3.vectorstock.com/i/1000x1000/30/97/flat-business-man-user-profile-avatar-icon-vector-4333097.jpg"} rounded />}
+          label={<Avatar alt="User settings" img={userProfile.profilePic ? userProfile?.profilePic :"https://cdn3.vectorstock.com/i/1000x1000/30/97/flat-business-man-user-profile-avatar-icon-vector-4333097.jpg"}  rounded />}
           arrowIcon={false}
           inline
           style={{zIndex:"99"}} >
@@ -58,7 +51,7 @@ console.log(existingUser);
             <span className="block text-sm">{userProfile?.username}</span>
             <span className="block truncate text-sm font-medium">{userProfile?.email}</span>
           </Dropdown.Header >
-          <Link to={'/'}> <Dropdown.Item>Home</Dropdown.Item></Link>
+          <Link to={'/'}> <Dropdown.Item >Home</Dropdown.Item></Link>
           <Dropdown.Item>Settings</Dropdown.Item>
           
           <Dropdown.Divider />

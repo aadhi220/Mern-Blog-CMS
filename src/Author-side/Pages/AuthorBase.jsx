@@ -8,6 +8,7 @@ import ManageUsers from './ManageUsers'
 import ManageBlog from './ManageBlog'
 import AddBlog from './AddBlog'
 import { getTokenContext } from '../../ContextApi/TokenContext'
+import ManageCategories from './ManageCategories'
 function AuthorBase() {
   const navigate=useNavigate()
   const {token,setToken}=useContext(getTokenContext)
@@ -43,8 +44,8 @@ navigate('/')
        
         <Route path="/addBlog" element={<AddBlog/>} />
         <Route path="/manageBlog" element={<ManageBlog/>} />
-        {/* <Route path="/blog/:id" element={<AuthorBlogDetail/>} />
-        <Route path="/blog/:id/edit" element={<AuthorBlogEdit/>} />
+        <Route path="/category" element={<ManageCategories/>} />
+        {/* <Route path="/blog/:id/edit" element={<AuthorBlogEdit/>} />
         <Route path="/blog/:id/delete" element={<AuthorBlogDelete/>} />
         <Route path="/blog/:id/comment" element={<AuthorBlogComment/>} />
         <Route path="/blog/:id/comment/:commentId" element={<AuthorBlogCommentDetail/>} />

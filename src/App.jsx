@@ -8,7 +8,10 @@ import ClientBase from './Client-side/Pages/ClientBase'
 import AuthorBase from './Author-side/Pages/AuthorBase'
 import Login from './Auth/Login'
 import Register from './Auth/Register'
-import { ToastContainer } from 'react-toastify'
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
+import ForgotPass from './Auth/ForgotPass'
 
 
 
@@ -31,6 +34,7 @@ const {isAuthor} = useContext(AuthorAuthContext)
    <Route path="/AuthorDashboard" element={<Navigate to="/dashboard/home" replace /> } />
    <Route path='/login' element={<Login/>} />
    <Route path='/register' element={<Register/>} />
+   <Route path='/forgotPassword' element={<ForgotPass/>} />
 
 
 
@@ -41,11 +45,9 @@ const {isAuthor} = useContext(AuthorAuthContext)
   </Routes>
   
   
-
-</div>
-<ToastContainer
+  <ToastContainer
 position="top-right"
-autoClose={5000}
+autoClose={500}
 hideProgressBar={false}
 newestOnTop={false}
 closeOnClick
@@ -56,7 +58,9 @@ pauseOnHover
 theme="light"
 />
 {/* Same as */}
-<ToastContainer />
+
+</div>
+
     </>
   )
 }

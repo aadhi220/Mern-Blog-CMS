@@ -1,8 +1,9 @@
 import { Button, Checkbox, Label, TextInput } from "flowbite-react";
-import { useState ,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { HiMail } from "react-icons/hi";
+
 import { Link, useNavigate } from "react-router-dom";
-import {registerApi} from '../Services/AllAPI';
+import { registerApi } from "../Services/AllAPI";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -19,8 +20,6 @@ export default function Register() {
   const [passError, setPassError] = useState(false);
   const [emailerror, setEmailerror] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-
-
 
   const HandleSubmit = async (e) => {
     console.log("clik");
@@ -82,14 +81,14 @@ export default function Register() {
       setEmail(value);
     }
   };
-useEffect(()=>{
-  setUserData({
-    ...userData,
-    username: user,
-    email: email,
-    password: pass,
-  });
-},[user,pass,email])
+  useEffect(() => {
+    setUserData({
+      ...userData,
+      username: user,
+      email: email,
+      password: pass,
+    });
+  }, [user, pass, email]);
 
   return (
     <div className="flex h-[100vh] justify-center items-center bg-slate-100">
