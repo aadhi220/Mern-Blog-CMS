@@ -9,43 +9,86 @@ import {
 import React, { useContext, useEffect, useState } from "react";
 import TextEditor from "../Components/TextEditor";
 import { toast } from "react-toastify";
-import { addBlogApi } from "../../Services/AllAPI";
+import { addBlogApi, getAllCategoryApi, getUserByIdApi } from "../../Services/AllAPI";
 import { getTokenContext } from "../../ContextApi/TokenContext";
+import { AuthorAuthContext } from "../../ContextApi/AuthorContext";
 function AddBlog() {
-  const {token} =useContext(getTokenContext)
+
+  const user = JSON.parse(sessionStorage.getItem("existingUser"));
+
+
+  const options = {
+    hour: "numeric",
+    minute: "numeric",
+    hour12: true,
+    month: "short",
+    day: "numeric",
+  };
+
+  const date = new Date();
+  const formattedDate = date.toLocaleString("en-US", options);
   const [blogDetails, setBlogDetails] = useState({
     title: "",
     caption: "",
     category: "",
     images: [],
     content: "",
+    userId:user._id,
+    username:user.username,
+    views:0,
+    likes:0,
+    created_at:formattedDate
   });
 
   console.log(blogDetails);
-
   const [allCategory,setCategory] = useState([])
+  const token =sessionStorage.getItem("token");
+  const reqHeader = {
+    "Content-Type": "multipart/form-data",
+    "Authorization": `Bearer ${token}`,
+  };
+  const getAllCategories=async()=>{
+    try {
+      const result = await getAllCategoryApi(reqHeader)
+      if (result.status === 200) {
+        setCategory(result.data)
+        console.log("category",result.data)
+      }
+    } catch (error) {
+      
+    }
+  }
  
+  console.log(typeof(blogDetails.images));
 const HandleSubmit =async (e)=>{
   e.preventDefault();
-  const {title,caption,category,images}=blogDetails;
+  const {title,caption,category,images,username,userId,views,likes,created_at,content}=blogDetails;
 
-  if(!title || !caption || !category || !images) {
-    toast.warnig("Please fill in all fields")
+  if(!title || !caption || !category || !images || !username || !userId  || !created_at ||!content) {
+    toast.warning("Please fill in all fields")
   }else {
     const reqBody = new FormData();
     reqBody.append("title", title);
     reqBody.append("caption", caption);
     reqBody.append("category", category);
-    images.forEach((image,index)=>{
-      reqBody.append(`image-${index+1}`,image)
-    })
-  }
+    
+    // Convert FileList to an array
+    const imagesArray = Array.from(images);
+    
+    imagesArray.forEach((image) => {
+      reqBody.append(`images`, image);
+    });
+    
+    reqBody.append('username', username);
+    reqBody.append('userId', userId);
+    reqBody.append('views', views);
+    reqBody.append('likes', likes);
+    reqBody.append('created_at', created_at);
+    reqBody.append('content', content);
+    
 
-  if (token) {
-    const reqHeader = {
-      "Content-Type": "multipart/form-data",
-      "Authorization": `Bearer ${token}`,
-    };
+  
+ 
 
   try {
     const result = await addBlogApi(reqBody,reqHeader)
@@ -59,12 +102,16 @@ const HandleSubmit =async (e)=>{
     console.log(error);
     
   }
+}
+
+
+
+}
+
+useEffect(()=>{
   
-}
-
-
-}
-
+  getAllCategories()
+},[])
 
 
   return (
@@ -77,7 +124,7 @@ const HandleSubmit =async (e)=>{
         </div>
 
         <section id="form" className="p-[1.5rem] shadow-xl bg-slate-100">
-          <form onSubmit={(e)=>HandleSubmit(e)} className="flex flex-col">
+          <form onSubmit={(e)=>HandleSubmit(e)} className="flex flex-col" >
             <div className="w-full my-[1rem]">
               <h3 className="text-lg font-medium">Blog Details</h3>
             </div>
@@ -119,12 +166,15 @@ const HandleSubmit =async (e)=>{
                 <div className=" block">
                   <Label htmlFor="category" value="Select Category" />
                 </div>
-                <Select id="category" required>
-                {allCategory.map((category,index) => (
-                  <option key={index} value={category.name}>{category.name}</option>
-                ))}
-                
-                </Select>
+                <Select onChange={(e)=>setBlogDetails({...blogDetails,category:e.target.value})} id="category"  required>
+  <option value="">All</option>
+  {allCategory.map((category, index) => (
+    <option key={index} value={category.category}>
+      {category.category}
+    </option>
+  ))}
+</Select>
+
               </div>
 
               <div className="mb-[1rem]">
@@ -153,7 +203,7 @@ const HandleSubmit =async (e)=>{
             </div>
             <div className="w-full flex ">
               <Button type="submit" className=" flex-1" color="blue">
-                Blue
+                Add
               </Button>
             </div>
           </form>
