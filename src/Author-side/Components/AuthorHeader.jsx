@@ -1,13 +1,16 @@
 
 'use client';
 
-import { Avatar, Dropdown} from 'flowbite-react';
+import { Avatar, DarkThemeToggle, Dropdown, Sidebar} from 'flowbite-react';
 import AuthorProfileMenu from './AuthorProfileMenu';
+import { useContext } from 'react';
+import { globalUseContext } from '../../ContextApi/GlobalContext';
 
 export default function AuthorHeader() {
+  const {showSidebar,setShowSidebar} =useContext(globalUseContext);
   return (
    <>
-      <header className="sticky top-0 inset-x-0 flex flex-wrap sm:justify-start sm:flex-nowrap z-[48] w-full bg-white border-b text-sm py-2.5 sm:py-4 lg:ps-64 dark:bg-gray-800 dark:border-gray-700">
+      <header className="sticky top-0 inset-x-0  flex-wrap sm:justify-start sm:flex-nowrap z-[48] w-full bg-white border-b text-sm py-2.5 sm:py-4 lg:ps-64 dark:bg-gray-800 dark:border-gray-700">
       <nav
         className="flex basis-full items-center w-full mx-auto px-4 sm:px-6 md:px-8"
         aria-label="Global"
@@ -96,27 +99,14 @@ export default function AuthorHeader() {
                 <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
               </svg>
             </button>
-            <button
+            <button onClick={()=>setShowSidebar(!showSidebar)}
               type="button"
               className="w-[2.375rem] h-[2.375rem] inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-gray-700 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
               data-hs-offcanvas="#hs-offcanvas-right"
             >
-              <svg
-                className="flex-shrink-0 w-4 h-4"
-                xmlns="http://www.w3.org/2000/svg"
-                width={24}
-                height={24}
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-              </svg>
+           <i className="fa-solid fa-bars fa-lg"></i>
             </button>
-          
+           <DarkThemeToggle />
          <AuthorProfileMenu/>
          
           </div>

@@ -22,7 +22,7 @@ const {isAuthor} = useContext(AuthorAuthContext)
  
   return (
     <>
-<div className='light'>
+<div className=''>
 
   
   <Routes>

@@ -59,7 +59,7 @@ export default function ManageCategories() {
             categoryResponce={categoryResponce}
           />
         </div>
-        <Table hoverable>
+        <Table hoverable striped>
           <Table.Head>
             <Table.HeadCell>category Name</Table.HeadCell>
             <Table.HeadCell>

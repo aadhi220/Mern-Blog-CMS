@@ -40,7 +40,7 @@ export default  function ProfileMenu() {
     //     );
     //   }
     }
-if(user.isAuthor){
+if(user?.isAuthor){
     setIsAuthor(true)
 }
 
@@ -58,7 +58,7 @@ console.log(existingUser);
             <span className="block text-sm">{userProfile?.username}</span>
             <span className="block truncate text-sm font-medium">{userProfile?.email}</span>
           </Dropdown.Header >
-          {isAuthor ? <Dropdown.Item ><Link to={'/AuthorDashboard'}>Dashboard</Link></Dropdown.Item> :<Dropdown.Item>Devlopment</Dropdown.Item> }
+          {isAuthor ? <Link to={'/AuthorDashboard'}><Dropdown.Item >Dashboard</Dropdown.Item></Link> :<Dropdown.Item>Devlopment</Dropdown.Item> }
           <Dropdown.Item>Settings</Dropdown.Item>
           
           <Dropdown.Divider />

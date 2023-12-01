@@ -79,7 +79,7 @@ function ManageUsers() {
         <div className="w-full mb-5 flex  px-[1rem] items-center  gap-10">
           <h3 className="text-2xl font-semibold">Users</h3>
         </div>
-        <Table hoverable>
+        <Table hoverable striped>
           <Table.Head>
             <Table.HeadCell>Name</Table.HeadCell>
             <Table.HeadCell>Created_at</Table.HeadCell>

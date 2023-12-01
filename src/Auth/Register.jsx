@@ -7,6 +7,16 @@ import { registerApi } from "../Services/AllAPI";
 
 export default function Register() {
   const navigate = useNavigate();
+  const options = {
+    hour: "numeric",
+    minute: "numeric",
+    hour12: true,
+    month: "short",
+    day: "numeric",
+  };
+
+  const date = new Date();
+  const formattedDate = date.toLocaleString("en-US", options);
   const [userData, setUserData] = useState({
     username: "",
     email: "",
@@ -31,6 +41,7 @@ export default function Register() {
         username: user,
         email: email,
         password: pass,
+        created_at: formattedDate,
       });
       console.log(userData);
       try {
@@ -82,6 +93,7 @@ export default function Register() {
     }
   };
   useEffect(() => {
+    const date = new Date();
     setUserData({
       ...userData,
       username: user,

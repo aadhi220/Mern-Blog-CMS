@@ -33,12 +33,12 @@ export default  function AuthorProfileMenu() {
     //     );
     //   }
     }
-if(user.isAuthor){
+if(user?.isAuthor){
     setIsAuthor(true)
 }
 
   }, []);
-console.log(existingUser);
+
 
     return (
      <div>

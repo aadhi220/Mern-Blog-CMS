@@ -21,7 +21,7 @@ function AuthorBase() {
       setToken("")
       navigate("/")
     }
-    if(!user.isAuthor){
+    if(!user?.isAuthor){
 navigate('/')
     }
     
@@ -35,7 +35,7 @@ navigate('/')
 
     <div className=''>
       <AuthorSidebar/>
-   <div className='pl-1 lg:pl-[17rem]'>
+   <div className='pl-1 lg:pl-[17rem] w-full min-h-[100vh] dark:bg-[#111827] '>
         
     <Routes>
     

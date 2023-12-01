@@ -28,6 +28,23 @@ export const deleteCategoryApi =async(categoryId,reqHeader)=>{
     return await commonApi('DELETE',`${SERVER_URL}/category/delete/${categoryId}`,{},reqHeader)
 }
 
+export const getAllUsersApi= async (reqHeader)=>{
+    return await commonApi('GET',`${SERVER_URL}/users/all`,"",reqHeader)
+}
+
+export const deleteUserApi =async(userId,reqHeader)=>{
+    return await commonApi('DELETE',`${SERVER_URL}/users/delete/${userId}`,{},reqHeader)
+
+}
+
+export const getUserByIdApi =async(userId,reqHeader)=>{
+    return await commonApi('GET',`${SERVER_URL}/users/user/${userId}`,"",reqHeader)
+}
+
+export const setAuthorApi=async(reqBody,reqHeader)=>{
+    return await commonApi('PATCH',`${SERVER_URL}/users/setAuthor`,reqBody,reqHeader)
+}
+
 //Authors Side
 
 //AddBlog
