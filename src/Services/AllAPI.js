@@ -72,6 +72,10 @@ export const getBlogByIdApi =async(blogId,reqHeader)=>{
     return await commonApi('GET',`${SERVER_URL}/blogs/get/${blogId}`,"",reqHeader)
 }
 
+export const setViewCountApi=async(reqBody)=>{
+    return await commonApi('PATCH',`${SERVER_URL}/blogs/viewCount`,reqBody,"")
+}
+
 
 //Client side
 
