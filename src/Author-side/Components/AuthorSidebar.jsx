@@ -1,13 +1,13 @@
 
 import { Link } from "react-router-dom";
-import { twMerge } from "tailwind-merge";
+
 import { AuthorAuthContext } from "../../ContextApi/AuthorContext";
 import { useContext } from "react";
-import { globalUseContext } from "../../ContextApi/GlobalContext";
+
 
 export default function AuthorSidebar() {
   const { isAdmin } = useContext(AuthorAuthContext);
-  const { showSidebar, setShowSidebar } = useContext(globalUseContext);
+  
 
   return (
     <>
@@ -17,28 +17,34 @@ export default function AuthorSidebar() {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <ul className="menu p-0 w-[15rem]  min-h-full  bg-base-100 shadow-2xl  text-base-content">
-          <div className="w-full h-[4.5rem] flex items-center ps-[rem]  text-center bg-white"><h1 className="text-xl hidden md:block ">Brand</h1></div>
-          {/* Sidebar content here */}
-          <li className="ps-[1rem]">
-            {" "}
-            <Link to={"/dashboard/home"}>Dashboard</Link>
-          </li>
-          <li className="ps-[1rem]">
+        <div className="menu p-0 w-[15rem]  min-h-full  bg-base-200  shadow-2xl  text-base-content">
+          <div className="w-full h-[4.5rem] flex items-center ps-10 bg-base-300 text-center shadow-lg "> <Link to={'/dashboard/home'} className="  font-semibold   text-2xl">RateLab.com</Link></div>
 
-          <Link to={"/dashboard/addBlog"}>Add Blog</Link>
-          </li>
-          <li className="ps-[1rem]">
-          <Link to={"/dashboard/manageBlog"}>ManageBlog</Link> </li>
-  { isAdmin &&  <>
-            <li className="ps-[1rem]">
-              <Link to={"/dashboard/category"}>Categories</Link>
+          {/* Sidebar content here */}
+          
+          <div className="flex flex-col gap-3 px-5 py-5">
+            <li className="">
+              {" "}
+              <Link className="text-lg font-medium" to={"/dashboard/home"}>Dashboard</Link>
             </li>
-            <li className="ps-[1rem]">
-              <Link to={"/dashboard/users"}>Users</Link>
+            <li className="">
+  
+            <Link className="text-lg font-medium" to={"/dashboard/addBlog"}>Add Blog</Link>
             </li>
-      </>}
-        </ul>
+            <li className="">
+            <Link className="text-lg font-medium" to={"/dashboard/manageBlog"}>ManageBlog</Link> </li>
+    { isAdmin &&  <>
+              <li className="">
+                <Link className="text-lg font-medium" to={"/dashboard/category"}>Categories</Link>
+              </li>
+              <li className="">
+                <Link className="text-lg font-medium" to={"/dashboard/users"}>Users</Link>
+              </li>
+        </>}
+          </div>
+      
+        </div>
+        
       </div>
 
 
