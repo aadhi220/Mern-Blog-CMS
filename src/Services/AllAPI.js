@@ -54,8 +54,10 @@ export const addBlogApi =async(reqBody,reqHeader)=>{
 
 //Edit Blog
 export const editBlogApi =async(reqBody,reqHeader)=>{
-    return await commonApi('PUT',`${SERVER_URL}/blogs/edit`,reqBody,reqHeader)
+    return await commonApi('PATCH',`${SERVER_URL}/blogs/edit`,reqBody,reqHeader)
 }
+
+
 // delete Blog
 
 export const deleteBlogApi =async(blogId,reqHeader)=>{

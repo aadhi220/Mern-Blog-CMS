@@ -3,6 +3,7 @@ import { deleteBlogApi, getAllBlogApi } from '../../Services/AllAPI';
 import { Table } from 'flowbite-react';
 import DeleteModal from '../Components/DeleteModal';
 import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
 
 function ManageBlog() {
 const [blogResponse,setBlogResponse] = useState(false)
@@ -104,15 +105,18 @@ useEffect (()=>{
                 
 
                   <Table.Cell className="flex gap-3 place-items-center">
-                    {/* <UserView user={blog} handleAuthorShip={handleAuthorShip} /> */}
-
-                    { 
+                  <Link to={`/dashboard/editBlog/${blog?._id}`} state={{blog:blog}}
+        className="bg-green-500  p-1 rounded-md"
+        
+      >
+        <i className="fa-regular fa-eye fa-lg text-white"></i>
+      </Link>
                       <DeleteModal
                         action={handleDeleteBlogPost}
                         id={blog?._id}
                         product={`this blog post `}
                       />
-                    }
+                    
                   </Table.Cell>
                 </Table.Row>
               ))}
