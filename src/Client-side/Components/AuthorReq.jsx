@@ -1,14 +1,7 @@
-import {
-  Button,
-  Checkbox,
-  FileInput,
-  Label,
-  Modal,
-  TextInput,
-} from "flowbite-react";
+import { Button, FileInput, Label, Modal, TextInput } from "flowbite-react";
 import { useState } from "react";
-import {UpdateProfileApi} from '../../Services/AllAPI'
-import {toast} from 'react-toastify'
+import { UpdateProfileApi } from "../../Services/AllAPI";
+import { toast } from "react-toastify";
 
 export default function Component({ openModal, setOpenModal }) {
   const user = JSON.parse(sessionStorage.getItem("existingUser"));
@@ -20,21 +13,17 @@ export default function Component({ openModal, setOpenModal }) {
     authorRequest: true,
     profilePic: "",
   });
-
   const HandleRequest = async (e) => {
     e.preventDefault();
     setLoading(true);
-    console.log("request", userData);
+    // console.log("request", userData);
     const { username, email, job, authorRequest, profilePic } = userData;
     const reqBody = new FormData();
     reqBody.append("username", username);
     reqBody.append("email", email);
     reqBody.append("job", job);
-
     reqBody.append("authorRequest", authorRequest);
-
     reqBody.append("images", profilePic);
-
     const token = sessionStorage.getItem("token");
     const reqHeader = {
       "Content-Type": "multipart/form-data",
@@ -42,25 +31,20 @@ export default function Component({ openModal, setOpenModal }) {
     };
 
     try {
-      const result =await UpdateProfileApi(reqBody,reqHeader)
+      const result = await UpdateProfileApi(reqBody, reqHeader);
       if (result.status === 200) {
         setLoading(false);
-        toast.success("request sent successfully")
+        toast.success("request sent successfully");
         setOpenModal(false);
-      }else {
+      } else {
         setLoading(false);
-        toast.error("something went wrong")
+        toast.error("something went wrong");
       }
-
-
-      
     } catch (error) {
       setLoading(false);
-      toast.error("something went wrong")
+      toast.error("something went wrong");
       console.log(error);
     }
-
-
   };
 
   return (
@@ -149,7 +133,13 @@ export default function Component({ openModal, setOpenModal }) {
               <button onClick={() => setOpenModal(!openModal)} className="btn">
                 Cancel
               </button>
-              <Button type="submit">Sent Request</Button>
+              <Button type="submit">
+                {loading ? (
+                  <span className="loading loading-spinner loading-md"></span>
+                ) : (
+                  "Sent Request"
+                )}
+              </Button>
             </div>
           </form>
         </Modal.Body>

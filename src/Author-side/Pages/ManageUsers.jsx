@@ -1,10 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Table } from "flowbite-react";
 import DeleteModal from "../Components/DeleteModal";
 import {
   deleteUserApi,
   getAllUsersApi,
-  getUserByIdApi,
   setAuthorApi,
 } from "../../Services/AllAPI";
 
@@ -15,7 +14,7 @@ function ManageUsers() {
   const token = sessionStorage.getItem("token");
   const [allUsers, setAllUsers] = useState({});
   const [userResponce, setUserResponce] = useState(false);
-  const [loading,setLoading]=useState(false);
+  const [loading, setLoading] = useState(false);
 
   const reqHeader = {
     "Content-Type": "application/json",
@@ -24,11 +23,11 @@ function ManageUsers() {
 
   const getAllUsers = async () => {
     try {
-      const temp="author"
-      const result = await getAllUsersApi(temp,reqHeader);
+      const temp = "author";
+      const result = await getAllUsersApi(temp, reqHeader);
       if (result.status === 200) {
         setAllUsers(result.data);
-        console.log(result.data);
+        // console.log(result.data);
       } else {
         console.log("api error ", result);
       }
@@ -62,18 +61,18 @@ function ManageUsers() {
     try {
       const result = await setAuthorApi(reqBody, reqHeader);
       if (result.status === 200) {
-        console.log("user AuthorShip Changed successfully");
-        setLoading(false)
+        // console.log("user AuthorShip Changed successfully");
+        setLoading(false);
         toast.success("User AuthorShip Changed successfully");
         setUserResponce(!userResponce);
       } else {
         console.log("api error ", result);
         setUserResponce(!userResponce);
-        setLoading(false)
+        setLoading(false);
       }
     } catch (error) {
       console.log(error);
-      setLoading(false)
+      setLoading(false);
     }
   };
 
@@ -141,7 +140,12 @@ function ManageUsers() {
                   </Table.Cell>
 
                   <Table.Cell className="flex gap-3 place-items-center">
-                    <UserView user={user} handleAuthorShip={handleAuthorShip}  loading={loading} setLoading={setLoading} />
+                    <UserView
+                      user={user}
+                      handleAuthorShip={handleAuthorShip}
+                      loading={loading}
+                      setLoading={setLoading}
+                    />
 
                     {!user.isAdmin && (
                       <DeleteModal

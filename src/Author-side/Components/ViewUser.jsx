@@ -2,8 +2,13 @@ import { Button, Modal } from "flowbite-react";
 import { useState } from "react";
 import { SERVER_URL } from "../../Services/serverUrl";
 
-export default function UserView({ user, handleAuthorShip,loading,setLoading }) {
-  const [openModal, setOpenModal] =useState(false)
+export default function UserView({
+  user,
+  handleAuthorShip,
+  loading,
+  setLoading,
+}) {
+  const [openModal, setOpenModal] = useState(false);
 
   return (
     <>
@@ -68,7 +73,11 @@ export default function UserView({ user, handleAuthorShip,loading,setLoading }) 
                 setLoading(true);
               }}
             >
-               {loading ? <span className="loading loading-spinner loading-md"></span> : "Revoke AuthorShip"}
+              {loading ? (
+                <span className="loading loading-spinner loading-md"></span>
+              ) : (
+                "Revoke AuthorShip"
+              )}
             </Button>
           ) : (
             <Button
@@ -77,7 +86,11 @@ export default function UserView({ user, handleAuthorShip,loading,setLoading }) 
                 setLoading(true);
               }}
             >
-              {loading ? <span className="loading loading-spinner loading-md"></span> : "Set As Author"}
+              {loading ? (
+                <span className="loading loading-spinner loading-md"></span>
+              ) : (
+                "Set As Author"
+              )}
             </Button>
           )}
           <Button color="gray" onClick={() => setOpenModal(false)}>

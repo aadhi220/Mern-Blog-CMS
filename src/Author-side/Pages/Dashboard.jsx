@@ -3,21 +3,21 @@ import { getAllBlogApi, getAllUsersApi } from "../../Services/AllAPI";
 
 function Dashboard() {
   const [totalViews, setTotalViews] = useState(0);
-  const [totalUsers,setTotalUsers] =useState([])
-  const [totalAuthors,setTotalAuthors] = useState([])
+  const [totalUsers, setTotalUsers] = useState([]);
+  const [totalAuthors, setTotalAuthors] = useState([]);
   const [allBlogs, setAllBlogs] = useState({});
   const token = sessionStorage.getItem("token");
   const searchKey = "";
   const reqHeader = {
     "Content-Type": "application/json",
-    "Authorization": `Bearer ${token}`,
+    Authorization: `Bearer ${token}`,
   };
   const getAllBlogs = async () => {
     try {
       const result = await getAllBlogApi(searchKey, reqHeader);
       if (result.status === 200) {
         setAllBlogs(result.data);
-        
+
         // Calculate total views
         const total = result.data.reduce((acc, blog) => acc + blog.views, 0);
         setTotalViews(total);
@@ -31,11 +31,11 @@ function Dashboard() {
 
   const getAllAuthors = async () => {
     try {
-      const temp ="author";
-      const result = await getAllUsersApi(temp,reqHeader);
+      const temp = "author";
+      const result = await getAllUsersApi(temp, reqHeader);
       if (result.status === 200) {
         setTotalAuthors(result.data);
-        console.log(result.data);
+        // console.log(result.data);
       } else {
         console.log("api error ", result);
       }
@@ -45,11 +45,11 @@ function Dashboard() {
   };
   const getAllUsers = async () => {
     try {
-      const temp =false;
-      const result = await getAllUsersApi(temp,reqHeader);
+      const temp = false;
+      const result = await getAllUsersApi(temp, reqHeader);
       if (result.status === 200) {
         setTotalUsers(result.data);
-        console.log(result.data);
+        // console.log(result.data);
       } else {
         console.log("api error ", result);
       }
@@ -58,41 +58,35 @@ function Dashboard() {
     }
   };
 
-
   useEffect(() => {
     getAllBlogs();
     getAllAuthors();
     getAllUsers();
   }, []);
 
-
-
   return (
     <>
-<div className="px-5 py-5">
-  <div className="stats stats-vertical lg:stats-horizontal shadow ">
-    
-    <div className="stat">
-      <div className="stat-title">Total Views</div>
-      <div className="stat-value">{totalViews}</div>
-      <div className="stat-desc"></div>
-    </div>
-    
-    <div className="stat">
-      <div className="stat-title">Total Users</div>
-      <div className="stat-value">{totalUsers?.length}</div>
-      <div className="stat-desc"></div>
-    </div>
-    
-    <div className="stat">
-      <div className="stat-title">Total Authors</div>
-      <div className="stat-value">{totalAuthors?.length}</div>
-      <div className="stat-desc"></div>
-    </div>
-    
-  </div>
-</div>
-   
+      <div className="w-full flex justify-center py-10">
+        <div className="stats stats-vertical  sm:stats-horizontal shadow ">
+          <div className="stat">
+            <div className="stat-title">Total Views</div>
+            <div className="stat-value">{totalViews}</div>
+            <div className="stat-desc"></div>
+          </div>
+
+          <div className="stat">
+            <div className="stat-title">Total Users</div>
+            <div className="stat-value">{totalUsers?.length}</div>
+            <div className="stat-desc"></div>
+          </div>
+
+          <div className="stat">
+            <div className="stat-title">Total Authors</div>
+            <div className="stat-value">{totalAuthors?.length}</div>
+            <div className="stat-desc"></div>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

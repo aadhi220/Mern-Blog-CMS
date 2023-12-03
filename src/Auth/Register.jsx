@@ -1,7 +1,6 @@
 import { Button, Checkbox, Label, TextInput } from "flowbite-react";
 import { useState, useEffect } from "react";
 import { HiMail } from "react-icons/hi";
-
 import { Link, useNavigate } from "react-router-dom";
 import { registerApi } from "../Services/AllAPI";
 
@@ -21,7 +20,7 @@ export default function Register() {
     username: "",
     email: "",
     password: "",
-    created_at:"",
+    created_at: "",
   });
   const [user, setUser] = useState("");
   const [email, setEmail] = useState("");
@@ -33,10 +32,10 @@ export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
 
   const HandleSubmit = async (e) => {
-    console.log("clik");
+    // console.log("clik");
     e.preventDefault();
     if (user && email && pass && cpass && pass === cpass) {
-      console.log("clik2");
+      // console.log("clik2");
       setUserData({
         ...userData,
         username: user,
@@ -44,11 +43,11 @@ export default function Register() {
         password: pass,
         created_at: formattedDate,
       });
-      console.log(userData);
+      // console.log(userData);
       try {
         const result = await registerApi(userData);
         if (result.status === 200) {
-          console.log("registered");
+          // console.log("registered");
           navigate("/login");
         } else {
           console.log("failed api", result);
@@ -94,7 +93,6 @@ export default function Register() {
     }
   };
   useEffect(() => {
-    
     setUserData({
       ...userData,
       username: user,
@@ -110,7 +108,9 @@ export default function Register() {
         className="flex flex-1 max-w-md bg-slate-50 shadow-xl px-[1rem] py-[2rem] rounded-lg  flex-col gap-4"
       >
         <div className="flex flex-col items-center">
-          <h1 className="text-3xl my-4">RateLab</h1>
+          <Link to={"/"} className="text-3xl my-4">
+            RateLab
+          </Link>
           <p className="opacity-70">Hai ,Welcome to Ratelab, Please Sign up</p>
         </div>
         <div className="max-w-md">
@@ -120,7 +120,6 @@ export default function Register() {
           <TextInput
             id="username3"
             placeholder="joe123"
-            
             value={user || ""}
             onChange={(e) => {
               setUser(e.target.value);

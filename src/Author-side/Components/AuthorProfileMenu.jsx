@@ -1,21 +1,21 @@
-import React, { useContext,useState } from "react";
-import { Avatar, Button, Dropdown } from 'flowbite-react';
+import React, { useContext, useState } from "react";
+import { Button, Dropdown } from "flowbite-react";
 import { Link } from "react-router-dom";
 import { getTokenContext } from "../../ContextApi/TokenContext";
-import {  Modal } from 'flowbite-react';
-import { HiOutlineExclamationCircle } from 'react-icons/hi';
+import { Modal } from "flowbite-react";
+import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { SERVER_URL } from "../../Services/serverUrl";
 
-export default  function AuthorProfileMenu() {
-    
-  const {handleSignOut}=useContext(getTokenContext)
+export default function AuthorProfileMenu() {
+  const { handleSignOut } = useContext(getTokenContext);
   const [openModal, setOpenModal] = useState(false);
   const user = JSON.parse(sessionStorage.getItem("existingUser"));
-    return (
-  <>
-       <div>
-          <Dropdown
-            label={ <img
+  return (
+    <>
+      <div>
+        <Dropdown
+          label={
+            <img
               className="inline-block h-[2.375rem] w-[2.375rem] object-cover rounded-full"
               src={
                 user.profilePic
@@ -23,22 +23,35 @@ export default  function AuthorProfileMenu() {
                   : "https://images.unsplash.com/photo-1531927557220-a9e23c1e4794?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
               }
               alt="Image Description"
-            />}
-            arrowIcon={false}
-            inline
-            style={{zIndex:"99"}} >
-            <Dropdown.Header >
-              <span className="block text-sm">{user?.username}</span>
-              <span className="block truncate text-sm font-medium">{user?.email}</span>
-            </Dropdown.Header >
-            <Link to={'/'}> <Dropdown.Item >Home</Dropdown.Item></Link>
-            {/* <Dropdown.Item>Settings</Dropdown.Item> */}
-            
-            <Dropdown.Divider />
-            <Dropdown.Item onClick={()=>setOpenModal(true)}>Sign out</Dropdown.Item>
-          </Dropdown>
-       </div>
-       <Modal show={openModal} size="md" onClose={() => setOpenModal(false)} popup>
+            />
+          }
+          arrowIcon={false}
+          inline
+          style={{ zIndex: "99" }}
+        >
+          <Dropdown.Header>
+            <span className="block text-sm">{user?.username}</span>
+            <span className="block truncate text-sm font-medium">
+              {user?.email}
+            </span>
+          </Dropdown.Header>
+          <Link to={"/"}>
+            {" "}
+            <Dropdown.Item>Home</Dropdown.Item>
+          </Link>
+
+          <Dropdown.Divider />
+          <Dropdown.Item onClick={() => setOpenModal(true)}>
+            Sign out
+          </Dropdown.Item>
+        </Dropdown>
+      </div>
+      <Modal
+        show={openModal}
+        size="md"
+        onClose={() => setOpenModal(false)}
+        popup
+      >
         <Modal.Header />
         <Modal.Body>
           <div className="text-center">
@@ -47,7 +60,7 @@ export default  function AuthorProfileMenu() {
               Are you sure you want to SignOut ?
             </h3>
             <div className="flex justify-center gap-4">
-              <Button color="failure" onClick={() =>handleSignOut() }>
+              <Button color="failure" onClick={() => handleSignOut()}>
                 {"Yes, I'm sure"}
               </Button>
               <Button color="gray" onClick={() => setOpenModal(false)}>
@@ -57,6 +70,6 @@ export default  function AuthorProfileMenu() {
           </div>
         </Modal.Body>
       </Modal>
-  </>
-    );
-  }
+    </>
+  );
+}

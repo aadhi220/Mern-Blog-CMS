@@ -1,16 +1,15 @@
 import { Button, Label, Modal, TextInput } from "flowbite-react";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { addCategoryApi } from "../../Services/AllAPI";
-import { getTokenContext } from "../../ContextApi/TokenContext";
+
 import { toast } from "react-toastify";
 
 export default function AddCategory({ setCategoryResponce, categoryResponce }) {
   const [openModal, setOpenModal] = useState(false);
   const [category, setCategory] = useState("");
-  const { token } = useContext(getTokenContext);
   const handleCategory = async (e) => {
     e.preventDefault();
-
+    const token = sessionStorage.getItem("token");
     const reqHeader = {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,

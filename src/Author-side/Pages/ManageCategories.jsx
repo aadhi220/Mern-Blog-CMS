@@ -1,12 +1,9 @@
 import { Table } from "flowbite-react";
 import AddCategory from "../Components/AddCategory";
 import { useEffect, useState } from "react";
-
 import { deleteCategoryApi, getAllCategoryApi } from "../../Services/AllAPI";
 import DeleteModal from "../Components/DeleteModal";
-
 export default function ManageCategories() {
-  // const {token}=useContext(getTokenContext)
   const [allCategories, setAllCategories] = useState([]);
   const [categoryResponce, setCategoryResponce] = useState(false);
   const token = sessionStorage.getItem("token");

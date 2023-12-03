@@ -1,4 +1,4 @@
-import React, { useContext, useEffect,useState } from 'react'
+import React, { useEffect,useState } from 'react'
 import Header from '../Components/Header'
 import Footer from '../Components/Footer'
 import { Routes,Route, Navigate } from 'react-router-dom'
@@ -6,10 +6,7 @@ import Home from './Home'
 import TrendingPage from './TrendingPage'
 import CommonPage from './CommonPage'
 import DetailPage from './DetailPage'
-import { getTokenContext } from '../../ContextApi/TokenContext'
-
 function ClientBase() {
-  const {token,setToken}=useContext(getTokenContext)
   const [showButton, setShowButton] = useState(false);
 const tokenl=sessionStorage.getItem('token')
   const handleScroll = () => {
@@ -35,14 +32,7 @@ const tokenl=sessionStorage.getItem('token')
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-  useEffect(()=>{
-    if(sessionStorage.getItem("token")){
-      setToken(sessionStorage.getItem("token"))
-    }else {
-      setToken("")
-    }
-    
-  },[token])
+
   return (
     <div className=' relative'>
     <Header/>
@@ -65,7 +55,7 @@ const tokenl=sessionStorage.getItem('token')
     onClick={backToTop}
     className="btn rounded-full w-[50px] h-[50px] btn-primary fixed bottom-4 right-4"
   >
-    <i class="fa-solid fa-arrow-up fa-lg"></i>
+    <i className="fa-solid fa-arrow-up fa-lg"></i>
   </button>
 )}
     

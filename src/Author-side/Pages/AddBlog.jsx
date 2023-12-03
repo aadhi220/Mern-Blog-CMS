@@ -6,12 +6,10 @@ import {
   TextInput,
   Textarea,
 } from "flowbite-react";
-import React, { useContext, useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import TextEditor from "../Components/TextEditor";
 import { toast } from "react-toastify";
-import { addBlogApi, getAllCategoryApi, getUserByIdApi } from "../../Services/AllAPI";
-import { getTokenContext } from "../../ContextApi/TokenContext";
-import { AuthorAuthContext } from "../../ContextApi/AuthorContext";
+import { addBlogApi, getAllCategoryApi} from "../../Services/AllAPI";
 import { useNavigate } from "react-router";
 function AddBlog() {
 
@@ -112,7 +110,7 @@ const HandleSubmit =async (e)=>{
       
     }else {
       toast.error("something went wrong")
-      console.log(result)
+      // console.log(result)
     }
   } catch (error) {
     console.log(error);
