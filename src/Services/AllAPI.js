@@ -68,6 +68,9 @@ export const getAllBlogApi =async(searchKey,reqHeader)=>{
     return await commonApi('GET',`${SERVER_URL}/blogs/all?search=${searchKey}`,"",reqHeader)
 }
 
+export const getAuthorBlogApi =async(searchKey,reqHeader)=>{
+    return await commonApi('GET',`${SERVER_URL}/blogs/getAuthorBlog?search=${searchKey}`,"",reqHeader)
+}
 export const getBlogByIdApi =async(blogId,reqHeader)=>{
     return await commonApi('GET',`${SERVER_URL}/blogs/get/${blogId}`,"",reqHeader)
 }

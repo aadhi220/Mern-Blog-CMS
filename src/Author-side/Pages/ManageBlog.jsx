@@ -59,7 +59,9 @@ useEffect (()=>{
         <Table hoverable striped>
           <Table.Head>
             <Table.HeadCell>Title</Table.HeadCell>
+            <Table.HeadCell>Category</Table.HeadCell>
             <Table.HeadCell>Author</Table.HeadCell>
+            <Table.HeadCell>Views</Table.HeadCell>
             <Table.HeadCell>Created_at</Table.HeadCell>
             {/* <Table.HeadCell>Roll</Table.HeadCell> */}
             <Table.HeadCell>
@@ -74,30 +76,23 @@ useEffect (()=>{
                   className="bg-white dark:border-gray-700 dark:bg-gray-800"
                 >
                   <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                    {/* <div className="flex items-center gap-x-3"> */}
+               
                     {blog?.title}
                     </Table.Cell>
+                    <Table.Cell>
                     
+                    
+                        { blog?.category}      
+                    
+                  </Table.Cell>
                     
                     
                   <Table.Cell>
-                      {/* <img
-                        className="inline-block h-[2.375rem] w-[2.375rem] rounded-full"
-                        src={
-                          user.profilePic
-                            ? user.profilePic
-                            : "https://images.unsplash.com/photo-1531927557220-a9e23c1e4794?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
-                        }
-                        alt="Image Description"
-                      /> */}
-                      {/* <div className="grow"> */}
-                        {/* <span className="block text-sm font-semibold text-gray-800 dark:text-gray-200"> */}
+                    
                         {blog.username}      
-                        {/* </span> */}
-                      
-                      {/* </div> */}
-                    {/* </div> */}
+                     
                   </Table.Cell>
+                  <Table.Cell className='text-start ps-10'>{blog.views}</Table.Cell>
                   <Table.Cell>
                     <a
                       href="#"
@@ -106,13 +101,7 @@ useEffect (()=>{
                       {blog.created_at}
                     </a>
                   </Table.Cell>
-                  {/* <Table.Cell>
-                    {user.isAdmin
-                      ? "Admin"
-                      : user?.isAuthor
-                      ? "Author"
-                      : "User "}
-                  </Table.Cell> */}
+                
 
                   <Table.Cell className="flex gap-3 place-items-center">
                     {/* <UserView user={blog} handleAuthorShip={handleAuthorShip} /> */}

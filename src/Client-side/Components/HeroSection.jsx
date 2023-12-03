@@ -2,11 +2,11 @@ import React from 'react'
 import CarousalH from './CarousalH'
 
 
-function HeroSection() {
+function HeroSection({topBlogs}) {
   return (
     <div className='px-[1rem]'>
       
-      <CarousalH/>
+      <CarousalH topBlogs={topBlogs}/>
     
     
     </div>
