@@ -15,6 +15,8 @@ const [token,setToken] =useState("")
       setToken("")
       
       sessionStorage.clear()
+    
+      navigate("/")
     }  
 
   return (

@@ -12,10 +12,12 @@ import { toast } from "react-toastify";
 import { addBlogApi, getAllCategoryApi, getUserByIdApi } from "../../Services/AllAPI";
 import { getTokenContext } from "../../ContextApi/TokenContext";
 import { AuthorAuthContext } from "../../ContextApi/AuthorContext";
+import { useNavigate } from "react-router";
 function AddBlog() {
 
   const user = JSON.parse(sessionStorage.getItem("existingUser"));
 
+  const navigate= useNavigate()
 
   const options = {
     hour: "numeric",
@@ -94,6 +96,20 @@ const HandleSubmit =async (e)=>{
     const result = await addBlogApi(reqBody,reqHeader)
     if(result.status === 200) {
       toast.success("successfully added")
+      setBlogDetails({
+        title: "",
+        caption: "",
+        category: "",
+        images: [],
+        content: "",
+        userId:user._id,
+        username:user.username,
+        views:0,
+        likes:0,
+        created_at:formattedDate
+      })
+      navigate("/dashboard/manageBlog")
+      
     }else {
       toast.error("something went wrong")
       console.log(result)

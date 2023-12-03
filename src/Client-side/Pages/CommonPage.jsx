@@ -4,7 +4,7 @@ import PaginationFunction from "../Components/Pagination";
 import { getAllBlogApi } from "../../Services/AllAPI";
 import { globalUseContext } from "../../ContextApi/GlobalContext";
 
-const TrendingPage = () => {
+const CommonPage = () => {
   const [loading, setLoading] = useState(true);
   const [allBlogs, setAllBlogs] = useState([]);
   const { searchKey } = useContext(globalUseContext);
@@ -43,10 +43,10 @@ const TrendingPage = () => {
         blog.title.toLowerCase().includes(searchKey.toLowerCase()) ||
         blog.category.toLowerCase().includes(searchKey.toLowerCase())
     )
-    .filter((blog) => blog.views > 10)
     .sort((blogA, blogB) => {
       const dateA = new Date(blogA.created_at);
       const dateB = new Date(blogB.created_at);
+
       return dateB - dateA;
     });
 
@@ -60,9 +60,9 @@ const TrendingPage = () => {
         ) : (
           <>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {allBlogs.length > 0 &&
+              {filteredBlog.length > 0 &&
                 filteredBlog.map((blog, index) => (
-                  <ProductCard key={index} blog={blog} />
+                  <ProductCard key={index} blog={blog} allBlog={filteredBlog} />
                 ))}
             </div>
 
@@ -77,4 +77,4 @@ const TrendingPage = () => {
   );
 };
 
-export default TrendingPage;
+export default CommonPage;

@@ -30,13 +30,16 @@ navigate('/')
   return (
 
     <>
-    <AuthorHeader/>
+   
 
-
-    <div className=''>
-      <AuthorSidebar/>
-   <div className='pl-1 lg:pl-[17rem] w-full min-h-[100vh] dark:bg-[#111827] '>
-        
+    <div className="drawer lg:drawer-open">
+  <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
+  <div className="drawer-content flex flex-col items-center justify-center">
+    {/* Page content here */}
+    <div className='w-full '>
+      
+   <div className='flex-1 w-full min-h-[100vh]  dark:bg-[#111827] '>
+   <AuthorHeader/>
     <Routes>
     
         <Route path="/home" element={<Dashboard/>} />
@@ -45,14 +48,17 @@ navigate('/')
         <Route path="/addBlog" element={<AddBlog/>} />
         <Route path="/manageBlog" element={<ManageBlog/>} />
         <Route path="/category" element={<ManageCategories/>} />
-        {/* <Route path="/blog/:id/edit" element={<AuthorBlogEdit/>} />
-        <Route path="/blog/:id/delete" element={<AuthorBlogDelete/>} />
-        <Route path="/blog/:id/comment" element={<AuthorBlogComment/>} />
-        <Route path="/blog/:id/comment/:commentId" element={<AuthorBlogCommentDetail/>} />
-        <Route path="/blog/:id/comment/:commentId/edit" element={<AuthorBlogCommentEdit/>} /> */}
+      
     </Routes>
    </div>
     </div>
+   
+  
+  </div> 
+<AuthorSidebar/>
+</div>
+
+  
 
 
     {/* <AuthorFooter/> */}

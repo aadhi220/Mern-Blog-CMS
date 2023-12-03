@@ -1,39 +1,91 @@
-import React from 'react'
-import HeroSection from '../Components/HeroSection'
-
+import React, { useState, useEffect } from 'react';
+import { getAllBlogApi } from '../../Services/AllAPI';
+import CarouselH from '../Components/CarousalH';
+import { Link } from 'react-router-dom';
+import { SERVER_URL } from '../../Services/serverUrl';
 
 function Home() {
-  
-  return (
-<div className='px-[3rem] py-10'>
-  
-  <HeroSection/>
+  const [topBlogs, setTopBlogs] = useState([]);
+  const [latestBlogs, setLatestBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
 
+  const token = "qwerty";
+  const reqHeader = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`,
+  };
+
+  const getHomeBlogs = async () => {
+    try {
+      const searchKe = "";
+      const result = await getAllBlogApi(searchKe, reqHeader);
+
+      if (result.status === 200) {
+        const blogArray = result.data;
+
+        const latBlogs = blogArray
+          .sort((blogA, blogB) => new Date(blogB.created_at) - new Date(blogA.created_at))
+          .slice(0, 4);
+
+        const tpBlogs = blogArray
+          .sort((blogA, blogB) => blogB.views - blogA.views)
+          .slice(0, 3);
+
+        setLatestBlogs(latBlogs);
+        setTopBlogs(tpBlogs);
+        setLoading(false); // Set loading to false when data is loaded
+      } else {
+        console.log("api error", result.message);
+      }
+    } catch (error) {
+      console.log("catch", error.message);
+    }
+  };
+
+  useEffect(() => {
+    console.log("render");
+    getHomeBlogs();
+  }, []);
+
+  if (loading) {
+    return <div className='flex justify-center items-center h-[80vh] '><span className="loading loading-bars loading-lg"></span></div>; // You can replace this with a loading spinner or any other UI you prefer
+  }
+
+  console.log("latest", latestBlogs);
+  console.log("top", topBlogs);
+  return (
+<div className='px-1 sm:px-3 md:px-6 lg:px-8 xl:px-12 py-10'>
+  
+  {/* <HeroSection topBlogs={topBlogs}/> */}
+  <div className='w-full flex justify-center items-center'>
+    <CarouselH topBlogs={topBlogs} />
+  
+  </div>
   <>
   {/* Card Blog */}
   <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+    <h1 className='text-2xl text-center sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl mb-10 font-semibold'>Latest Blogs</h1>
     {/* Grid */}
     <div className="grid lg:grid-cols-2 lg:gap-y-16 gap-10">
       {/* Card */}
-      <a
-        className="group rounded-xl overflow-hidden dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+      {latestBlogs && latestBlogs.length > 0 && latestBlogs.map((latestBlog,index)=>(
+        <Link key={index} to={`/detailPage/${latestBlog._id}`} state={{viewUp:latestBlog.views+1,author:latestBlog.username}}    className="group rounded-xl overflow-hidden dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
         href="#"
       >
         <div className="sm:flex">
           <div className="flex-shrink-0 relative rounded-xl overflow-hidden w-full sm:w-56 h-44">
             <img
               className="group-hover:scale-105 transition-transform duration-500 ease-in-out w-full h-full absolute top-0 start-0 object-cover rounded-xl"
-              src="https://images.unsplash.com/photo-1540575861501-7cf05a4b125a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
+              src={`${SERVER_URL}/uploads/${latestBlog.images[0]}`}
               alt="Image Description"
             />
           </div>
           <div className="grow mt-4 sm:mt-0 sm:ms-6 px-4 sm:px-0">
             <h3 className="text-xl font-semibold text-gray-800 group-hover:text-gray-600 dark:text-gray-300 dark:group-hover:text-white">
-              Studio by Preline
+              {latestBlog.title}
             </h3>
             <p className="mt-3 text-gray-600 dark:text-gray-400">
-              Produce professional, reliable streams easily leveraging Preline's
-              innovative broadcast studio
+              {latestBlog.caption}
             </p>
             <p className="mt-4 inline-flex items-center gap-x-1 text-blue-600 decoration-2 hover:underline font-medium">
               Read more
@@ -54,131 +106,9 @@ function Home() {
             </p>
           </div>
         </div>
-      </a>
-      {/* End Card */}
-      {/* Card */}
-      <a
-        className="group rounded-xl overflow-hidden dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-        href="#"
-      >
-        <div className="sm:flex">
-          <div className="flex-shrink-0 relative rounded-xl overflow-hidden w-full sm:w-56 h-44">
-            <img
-              className="group-hover:scale-105 transition-transform duration-500 ease-in-out w-full h-full absolute top-0 start-0 object-cover rounded-xl"
-              src="https://images.unsplash.com/photo-1668906093328-99601a1aa584?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=986&q=80"
-              alt="Image Description"
-            />
-          </div>
-          <div className="grow mt-4 sm:mt-0 sm:ms-6 px-4 sm:px-0">
-            <h3 className="text-xl font-semibold text-gray-800 group-hover:text-gray-600 dark:text-gray-300 dark:group-hover:text-white">
-              Onsite
-            </h3>
-            <p className="mt-3 text-gray-600 dark:text-gray-400">
-              Optimize your in-person experience with best-in-class capabilities
-              like badge printing and lead retrieval
-            </p>
-            <p className="mt-4 inline-flex items-center gap-x-1 text-blue-600 decoration-2 hover:underline font-medium">
-              Read more
-              <svg
-                className="flex-shrink-0 w-4 h-4"
-                xmlns="http://www.w3.org/2000/svg"
-                width={24}
-                height={24}
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="m9 18 6-6-6-6" />
-              </svg>
-            </p>
-          </div>
-        </div>
-      </a>
-      {/* End Card */}
-      {/* Card */}
-      <a
-        className="group rounded-xl overflow-hidden dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-        href="#"
-      >
-        <div className="sm:flex">
-          <div className="flex-shrink-0 relative rounded-xl overflow-hidden w-full sm:w-56 h-44">
-            <img
-              className="group-hover:scale-105 transition-transform duration-500 ease-in-out w-full h-full absolute top-0 start-0 object-cover rounded-xl"
-              src="https://images.unsplash.com/photo-1567016526105-22da7c13161a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
-              alt="Image Description"
-            />
-          </div>
-          <div className="grow mt-4 sm:mt-0 sm:ms-6 px-4 sm:px-0">
-            <h3 className="text-xl font-semibold text-gray-800 group-hover:text-gray-600 dark:text-gray-300 dark:group-hover:text-white">
-              The complete guide to OKRs
-            </h3>
-            <p className="mt-3 text-gray-600 dark:text-gray-400">
-              How to make objectives and key results work for your company
-            </p>
-            <p className="mt-4 inline-flex items-center gap-x-1 text-blue-600 decoration-2 hover:underline font-medium">
-              Read more
-              <svg
-                className="flex-shrink-0 w-4 h-4"
-                xmlns="http://www.w3.org/2000/svg"
-                width={24}
-                height={24}
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="m9 18 6-6-6-6" />
-              </svg>
-            </p>
-          </div>
-        </div>
-      </a>
-      {/* End Card */}
-      {/* Card */}
-      <a
-        className="group rounded-xl overflow-hidden dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-        href="#"
-      >
-        <div className="sm:flex">
-          <div className="flex-shrink-0 relative rounded-xl overflow-hidden w-full sm:w-56 h-44">
-            <img
-              className="group-hover:scale-105 transition-transform duration-500 ease-in-out w-full h-full absolute top-0 start-0 object-cover rounded-xl"
-              src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
-              alt="Image Description"
-            />
-          </div>
-          <div className="grow mt-4 sm:mt-0 sm:ms-6 px-4 sm:px-0">
-            <h3 className="text-xl font-semibold text-gray-800 group-hover:text-gray-600 dark:text-gray-300 dark:group-hover:text-white">
-              People program models
-            </h3>
-            <p className="mt-3 text-gray-600 dark:text-gray-400">
-              Six approaches to bringing your People strategy to life
-            </p>
-            <p className="mt-4 inline-flex items-center gap-x-1 text-blue-600 decoration-2 hover:underline font-medium">
-              Read more
-              <svg
-                className="flex-shrink-0 w-4 h-4"
-                xmlns="http://www.w3.org/2000/svg"
-                width={24}
-                height={24}
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="m9 18 6-6-6-6" />
-              </svg>
-            </p>
-          </div>
-        </div>
-      </a>
+      </Link>
+      ))}
+
       {/* End Card */}
     </div>
     {/* End Grid */}
