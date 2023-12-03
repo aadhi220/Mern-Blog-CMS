@@ -12,17 +12,22 @@ import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 import ForgotPass from './Auth/ForgotPass'
+// import { globalUseContext } from './ContextApi/GlobalContext'
 
 
 
 
 function App() {
-const {isAuthor} = useContext(AuthorAuthContext)
+  // const {isdark}=useContext(globalUseContext)
+  
+  // useEffect(() => {
+  //   localStorage.setItem('isdark', JSON.stringify(isdark));
+  // }, [isdark]);
 
  
   return (
     <>
-<div className=''>
+<div data-theme="light">
 
   
   <Routes>

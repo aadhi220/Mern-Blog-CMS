@@ -28,8 +28,8 @@ export const deleteCategoryApi =async(categoryId,reqHeader)=>{
     return await commonApi('DELETE',`${SERVER_URL}/category/delete/${categoryId}`,{},reqHeader)
 }
 
-export const getAllUsersApi= async (reqHeader)=>{
-    return await commonApi('GET',`${SERVER_URL}/users/all`,"",reqHeader)
+export const getAllUsersApi= async (temp,reqHeader)=>{
+    return await commonApi('GET',`${SERVER_URL}/users/all/${temp}`,"",reqHeader)
 }
 
 export const deleteUserApi =async(userId,reqHeader)=>{
@@ -82,3 +82,6 @@ export const setViewCountApi=async(reqBody)=>{
 
 //Client side
 
+export const UpdateProfileApi=async(reqBody,reqHeader)=>{
+    return await commonApi('PATCH',`${SERVER_URL}/users/setAuthorReq`,reqBody,reqHeader)
+}

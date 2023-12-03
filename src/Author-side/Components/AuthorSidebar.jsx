@@ -6,7 +6,7 @@ import { useContext } from "react";
 
 
 export default function AuthorSidebar() {
-  const { isAdmin } = useContext(AuthorAuthContext);
+  const user = JSON.parse(sessionStorage.getItem("existingUser"));
   
 
   return (
@@ -33,7 +33,7 @@ export default function AuthorSidebar() {
             </li>
             <li className="">
             <Link className="text-lg font-medium" to={"/dashboard/manageBlog"}>ManageBlog</Link> </li>
-    { isAdmin &&  <>
+    { user.isAdmin &&  <>
               <li className="">
                 <Link className="text-lg font-medium" to={"/dashboard/category"}>Categories</Link>
               </li>

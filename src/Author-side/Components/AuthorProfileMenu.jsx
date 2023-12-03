@@ -1,62 +1,38 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext,useState } from "react";
 import { Avatar, Button, Dropdown } from 'flowbite-react';
 import { Link } from "react-router-dom";
 import { getTokenContext } from "../../ContextApi/TokenContext";
-import { AuthorAuthContext } from "../../ContextApi/AuthorContext";
 import {  Modal } from 'flowbite-react';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
+import { SERVER_URL } from "../../Services/serverUrl";
 
 export default  function AuthorProfileMenu() {
     
   const {handleSignOut}=useContext(getTokenContext)
-  const {isAuthor,setIsAuthor,isAdmin,setIsAdmin,userProfile,setUserProfile}=useContext(AuthorAuthContext)
-  const [existingUser,setExistingUser]=useState("")
   const [openModal, setOpenModal] = useState(false);
-
-
-   
-  useEffect(() => {
-    const user = JSON.parse(sessionStorage.getItem("existingUser"));
-    if (user) {
-      // console.log(user);
-      setUserProfile({
-        username:user.username,
-    email:user.email,
-    password:user.password,
-    profilePic:user.profilePic,
-    isAuthor:user.isAuthor,
-    isAdmin:user.isAdmin,
-      });
-    //   if (user.profile) {
-    //     setExistingImage(`${BASE_URL}/uploads/${user.profile}`);
-    //     console.log("dd",existingImage)
-    //   } else {
-    //     setExistingImage(
-    //       "https://www.pngall.com/wp-content/uploads/5/Profile-Avatar-PNG.png"
-    //     );
-    //   }
-    }
-if(user?.isAuthor){
-    setIsAuthor(true)
-}
-
-  }, []);
-
-
+  const user = JSON.parse(sessionStorage.getItem("existingUser"));
     return (
   <>
        <div>
           <Dropdown
-            label={<Avatar alt="User settings" img={userProfile.profilePic ? userProfile?.profilePic :"https://cdn3.vectorstock.com/i/1000x1000/30/97/flat-business-man-user-profile-avatar-icon-vector-4333097.jpg"}  rounded />}
+            label={ <img
+              className="inline-block h-[2.375rem] w-[2.375rem] object-cover rounded-full"
+              src={
+                user.profilePic
+                  ? `${SERVER_URL}/uploads/${user?.profilePic}`
+                  : "https://images.unsplash.com/photo-1531927557220-a9e23c1e4794?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
+              }
+              alt="Image Description"
+            />}
             arrowIcon={false}
             inline
             style={{zIndex:"99"}} >
             <Dropdown.Header >
-              <span className="block text-sm">{userProfile?.username}</span>
-              <span className="block truncate text-sm font-medium">{userProfile?.email}</span>
+              <span className="block text-sm">{user?.username}</span>
+              <span className="block truncate text-sm font-medium">{user?.email}</span>
             </Dropdown.Header >
             <Link to={'/'}> <Dropdown.Item >Home</Dropdown.Item></Link>
-            <Dropdown.Item>Settings</Dropdown.Item>
+            {/* <Dropdown.Item>Settings</Dropdown.Item> */}
             
             <Dropdown.Divider />
             <Dropdown.Item onClick={()=>setOpenModal(true)}>Sign out</Dropdown.Item>

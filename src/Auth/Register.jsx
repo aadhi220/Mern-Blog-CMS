@@ -21,6 +21,7 @@ export default function Register() {
     username: "",
     email: "",
     password: "",
+    created_at:"",
   });
   const [user, setUser] = useState("");
   const [email, setEmail] = useState("");
@@ -93,7 +94,7 @@ export default function Register() {
     }
   };
   useEffect(() => {
-    const date = new Date();
+    
     setUserData({
       ...userData,
       username: user,
@@ -114,12 +115,12 @@ export default function Register() {
         </div>
         <div className="max-w-md">
           <div className="mb-2 block">
-            <Label htmlFor="username3" value="Username" />
+            <Label htmlFor="username3" value="FullName" />
           </div>
           <TextInput
             id="username3"
             placeholder="joe123"
-            addon="@"
+            
             value={user || ""}
             onChange={(e) => {
               setUser(e.target.value);

@@ -10,10 +10,12 @@ import {
 
 import { toast } from "react-toastify";
 import UserView from "../Components/ViewUser";
+import { SERVER_URL } from "../../Services/serverUrl";
 function ManageUsers() {
   const token = sessionStorage.getItem("token");
   const [allUsers, setAllUsers] = useState({});
   const [userResponce, setUserResponce] = useState(false);
+  const [loading,setLoading]=useState(false);
 
   const reqHeader = {
     "Content-Type": "application/json",
@@ -22,7 +24,8 @@ function ManageUsers() {
 
   const getAllUsers = async () => {
     try {
-      const result = await getAllUsersApi(reqHeader);
+      const temp="author"
+      const result = await getAllUsersApi(temp,reqHeader);
       if (result.status === 200) {
         setAllUsers(result.data);
         console.log(result.data);
@@ -49,23 +52,28 @@ function ManageUsers() {
     }
   };
 
-  const handleAuthorShip = async (userId, roll) => {
+  const handleAuthorShip = async (user, roll) => {
     const reqBody = {
-      id: userId,
+      id: user._id,
+      email: user.email,
+      username: user.username,
       isAuthor: roll,
     };
     try {
       const result = await setAuthorApi(reqBody, reqHeader);
       if (result.status === 200) {
         console.log("user AuthorShip Changed successfully");
+        setLoading(false)
         toast.success("User AuthorShip Changed successfully");
         setUserResponce(!userResponce);
       } else {
         console.log("api error ", result);
         setUserResponce(!userResponce);
+        setLoading(false)
       }
     } catch (error) {
       console.log(error);
+      setLoading(false)
     }
   };
 
@@ -98,10 +106,10 @@ function ManageUsers() {
                   <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                     <div className="flex items-center gap-x-3">
                       <img
-                        className="inline-block h-[2.375rem] w-[2.375rem] rounded-full"
+                        className="inline-block h-[2.375rem] w-[2.375rem] object-cover rounded-full"
                         src={
                           user.profilePic
-                            ? user.profilePic
+                            ? `${SERVER_URL}/uploads/${user?.profilePic}`
                             : "https://images.unsplash.com/photo-1531927557220-a9e23c1e4794?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
                         }
                         alt="Image Description"
@@ -133,7 +141,7 @@ function ManageUsers() {
                   </Table.Cell>
 
                   <Table.Cell className="flex gap-3 place-items-center">
-                    <UserView user={user} handleAuthorShip={handleAuthorShip} />
+                    <UserView user={user} handleAuthorShip={handleAuthorShip}  loading={loading} setLoading={setLoading} />
 
                     {!user.isAdmin && (
                       <DeleteModal

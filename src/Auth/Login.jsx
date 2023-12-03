@@ -25,15 +25,20 @@ export default function Login() {
               toast.success("Login successful")
               sessionStorage.setItem("existingUser",JSON.stringify(result.data.existingUser))
               sessionStorage.setItem("token",result.data.token)
+              setUserData({
+                email:"",
+                password:"",
+               })
               navigate('/')
               
               
             }else{
-              toast.error("Login failed")
+              toast.error("user not found")
               console.log(result);
             }
           } catch (error) {
             console.log(error);
+            toast.error("Login failed")
           }
         } else {
           alert("please fill completely!!");

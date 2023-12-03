@@ -5,9 +5,9 @@ import { Avatar, DarkThemeToggle, Dropdown, Sidebar} from 'flowbite-react';
 import AuthorProfileMenu from './AuthorProfileMenu';
 import { useContext } from 'react';
 import { globalUseContext } from '../../ContextApi/GlobalContext';
+// import DarkModeToggle from '../../Client-side/Components/DarkModeToggle';
 
 export default function AuthorHeader() {
-  const {showSidebar,setShowSidebar} =useContext(globalUseContext);
   return (
    <>
       <header className="sticky top-0 inset-x-0  flex-wrap sm:justify-start sm:flex-nowrap z-[48] shadow-xl bg-base-200 text-sm py-2.5 sm:py-4 lg:ps-64 dark:bg-gray-800 dark:border-gray-700">
@@ -28,7 +28,7 @@ export default function AuthorHeader() {
         <div></div>
     
           <div className="flex items-center ms-auto gap-2">
-            <button
+            {/* <button
               type="button"
               className="w-[2.375rem] h-[2.375rem] inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-gray-700 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
             >
@@ -48,8 +48,9 @@ export default function AuthorHeader() {
                 <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
               </svg>
             </button>
-          
-           <DarkThemeToggle />
+           */}
+           {/* <DarkThemeToggle /> */}
+           {/* <DarkModeToggle/> */}
            <label htmlFor="my-drawer-2" className=" drawer-button lg:hidden"> <i className="fa-solid fa-bars fa-lg"></i></label>
          <AuthorProfileMenu/>
          

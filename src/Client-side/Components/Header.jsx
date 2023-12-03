@@ -7,6 +7,7 @@ import { AuthorAuthContext } from "../../ContextApi/AuthorContext";
 import { getTokenContext } from "../../ContextApi/TokenContext";
 import ProfileMenu from "./ProfileMenu";
 import { globalUseContext } from "../../ContextApi/GlobalContext";
+import DarkModeToggle from "./DarkModeToggle";
 export default function Header() {
   const {setSearchKey,searchKey}=useContext(globalUseContext)
  const location=useLocation()
@@ -29,13 +30,13 @@ const reqHeader = {
       aria-label="Global"
     >
       <div className="me-5 md:me-8">
-        <a
+        <Link to={'/'}
           className="flex-none text-xl font-semibold text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-          href="#"
+          
           aria-label="Brand"
         >
           RateLab
-        </a>
+        </Link>
       </div>
       <div className="w-full flex items-center justify-end ms-auto sm:justify-between sm:gap-x-3 sm:order-3">
         {/* <div className="sm:hidden">
@@ -100,28 +101,8 @@ const reqHeader = {
             
         </div>
         <div className="flex flex-row items-center justify-end gap-2">
-         {token && <button
-            type="button"
-           
-            className="w-[2.375rem] h-[2.375rem] inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-white hover:bg-white/20 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:ring-1 focus:ring-gray-600"
-          >
-            <svg
-              className="flex-shrink-0 w-4 h-4"
-              xmlns="http://www.w3.org/2000/svg"
-              width={24}
-              height={24}
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
-              <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
-            </svg>
-          </button>}
-        
+        {/* <DarkModeToggle/> */}
+         
           <div
         
           >

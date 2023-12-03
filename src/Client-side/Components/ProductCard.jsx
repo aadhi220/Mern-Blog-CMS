@@ -5,7 +5,7 @@ import { SERVER_URL } from '../../Services/serverUrl';
 
 export default function ProductCard({blog}) {
   return (
-    <Link to={`/detailPage/${blog._id}`} state={{viewUp:blog.views+1,author:blog.username}}
+    <Link to={`/detailPage/${blog._id}`} state={{viewUp:blog.views+1,author:blog.username,authorId:blog.userId}}
     className="group flex flex-col h-full border border-gray-200 hover:border-transparent hover:shadow-lg transition-all rounded overflow-hidden duration-300   dark:border-gray-700 dark:hover:border-transparent dark:hover:shadow-black/[.4] dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
     
   >

@@ -69,7 +69,7 @@ function Home() {
     <div className="grid lg:grid-cols-2 lg:gap-y-16 gap-10">
       {/* Card */}
       {latestBlogs && latestBlogs.length > 0 && latestBlogs.map((latestBlog,index)=>(
-        <Link key={index} to={`/detailPage/${latestBlog._id}`} state={{viewUp:latestBlog.views+1,author:latestBlog.username}}    className="group rounded-xl overflow-hidden dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+        <Link key={index} to={`/detailPage/${latestBlog._id}`} state={{viewUp:latestBlog.views+1,author:latestBlog.username,authorId:latestBlog.userId}}    className="group rounded-xl overflow-hidden dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
         href="#"
       >
         <div className="sm:flex">

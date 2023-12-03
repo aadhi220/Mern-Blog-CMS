@@ -6,9 +6,12 @@ export const globalUseContext=createContext()
 function GlobalContext({children}) {
     // const [showSidebar,setShowSidebar]=useState(true)
     const [searchKey,setSearchKey]=useState("")
+    const [isdark, setIsdark] = useState(
+      
+    );
   return (
     <>
-    <globalUseContext.Provider value={{searchKey,setSearchKey}}>{children}</globalUseContext.Provider>
+    <globalUseContext.Provider value={{searchKey,setSearchKey,isdark,setIsdark}}>{children}</globalUseContext.Provider>
     
     
     </>
