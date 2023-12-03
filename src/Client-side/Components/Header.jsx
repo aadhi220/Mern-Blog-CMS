@@ -2,16 +2,17 @@ import React, { useContext, useState } from "react";
 
 
 import NavBarSecond from "./NavBar";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthorAuthContext } from "../../ContextApi/AuthorContext";
 import { getTokenContext } from "../../ContextApi/TokenContext";
 import ProfileMenu from "./ProfileMenu";
 import { globalUseContext } from "../../ContextApi/GlobalContext";
 export default function Header() {
   const {setSearchKey,searchKey}=useContext(globalUseContext)
- 
+ const location=useLocation()
 const token =sessionStorage.getItem("token");
-
+const navigate=useNavigate()
+const [open,setOpen] = useState(false)
 const reqHeader = {
   "Content-Type": "application/json",
   "Authorization": `Bearer ${token}`,
@@ -37,10 +38,11 @@ const reqHeader = {
         </a>
       </div>
       <div className="w-full flex items-center justify-end ms-auto sm:justify-between sm:gap-x-3 sm:order-3">
-        <div className="sm:hidden">
-          <button
+        {/* <div className="sm:hidden">
+{           <button
             type="button"
             className="w-[2.375rem] h-[2.375rem] inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-white hover:bg-white/20 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:ring-1 focus:ring-gray-600"
+            onClick={()=>setOpen(!open)}
           >
             <svg
               className="flex-shrink-0 w-4 h-4"
@@ -57,14 +59,14 @@ const reqHeader = {
               <circle cx={11} cy={11} r={8} />
               <path d="m21 21-4.3-4.3" />
             </svg>
-          </button>
-        </div>
-        <div className="hidden mx-auto sm:block">
-          <label htmlFor="icon" className="sr-only">
+          </button>}
+        </div> */}
+        <div  className={`   mx-auto flex gap-2`}>
+          {/* <label htmlFor="icon" className="sr-only">
             Search
-          </label>
+          </label> */}
           <div className="relative">
-            <div className="absolute inset-y-0 start-0 flex items-center pointer-events-none z-20 ps-4">
+            <div  onClick={()=>setOpen(!open)} className="absolute inset-y-0 start-0 flex items-center pointer-events-none z-20 ps-4">
               <svg
                 className="flex-shrink-0 h-4 w-4 text-gray-500"
                 xmlns="http://www.w3.org/2000/svg"
@@ -87,17 +89,20 @@ const reqHeader = {
               name="icon"
               value={searchKey || ""}
               onChange={(e)=>setSearchKey(e.target.value)}
-              className="py-2 px-4 ps-11 pe-20 block w-92 md:w-96 bg-transparent border-gray-700 shadow-sm rounded-lg text-sm text-gray-300 focus:z-10 focus:border-gray-900 focus:ring-gray-600 placeholder:text-gray-500"
+              className="py-2 px-1 ps-1 sm:ps-11 pe-20 block w-[2rem]  focus:w-[10rem] sm:focus:w-96  md:w-96 bg-transparent border-gray-700 shadow-sm rounded-lg text-sm text-gray-300 focus:z-10 focus:bg-gray-800 focus:border-gray-900 focus:ring-gray-600 placeholder:text-gray-500"
               placeholder="Search"
             />
-            <div className="absolute inset-y-0 end-0 flex items-center pointer-events-none z-20 pe-4">
-              <span className="text-gray-500">Ctrl + /</span>
-            </div>
+           
           </div>
+        {   <button  onClick={()=>{navigate('/all')}} className=" btn hidden btn-sm mt-1 sm:flex items-center  z-20 pe-4">
+              <span className="text-gray-500  sm:block">Search</span>
+            </button>}
+            
         </div>
         <div className="flex flex-row items-center justify-end gap-2">
-          <button
+         {token && <button
             type="button"
+           
             className="w-[2.375rem] h-[2.375rem] inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-white hover:bg-white/20 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:ring-1 focus:ring-gray-600"
           >
             <svg
@@ -115,7 +120,7 @@ const reqHeader = {
               <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
               <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
             </svg>
-          </button>
+          </button>}
         
           <div
         

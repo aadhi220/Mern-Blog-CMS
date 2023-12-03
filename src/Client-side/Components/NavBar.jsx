@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { getAllCategoryApi } from '../../Services/AllAPI';
 import { globalUseContext } from '../../ContextApi/GlobalContext';
 
@@ -9,9 +9,12 @@ import { globalUseContext } from '../../ContextApi/GlobalContext';
 function NavBarSecond({token,reqHeader}) {
   const {setSearchKey}=useContext(globalUseContext)
   const [allCategories,setAllCategories]=useState([])
+  const navigate = useNavigate()
 
   const handleCategory =(categoryName)=>{
 setSearchKey(categoryName)
+navigate('/all')
+
   }
   
   const getAllCategories = async () => {
@@ -52,7 +55,7 @@ useEffect(()=>{
         </Link>
       </div>
       <div className="snap-center shrink-0 pe-5 sm:pe-8 sm:last-pe-0">
-        <Link to={'/all'}
+        <Link to={'/all'} onClick={()=>handleCategory("")}
           className="inline-flex items-center gap-x-2 hover:text-gray-500 dark:text-gray-400 dark:hover:text-gray-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
          
         >
@@ -60,21 +63,21 @@ useEffect(()=>{
         </Link>
       </div>
       <div className="snap-center shrink-0 pe-5 sm:pe-8 sm:last-pe-0">
-        <Link to={'/trending'}
+        <Link to={'/trending'} onClick={()=>setSearchKey("")}
           className="inline-flex items-center gap-x-2 hover:text-gray-500 dark:text-gray-400 dark:hover:text-gray-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
          
         >
           Trending
         </Link>
       </div>
-      <div className="snap-center shrink-0 pe-5 sm:pe-8 sm:last-pe-0">
+      {/* <div className="snap-center shrink-0 pe-5 sm:pe-8 sm:last-pe-0">
         <Link to={'/trending'}
           className="inline-flex items-center gap-x-2 hover:text-gray-500 dark:text-gray-400 dark:hover:text-gray-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
          
         >
           Gadgets
         </Link>
-      </div>
+      </div> */}
       {allCategories?.length>0 && allCategories.map((menu,index)=>(
       <div key={index} className="snap-center shrink-0 pe-5 sm:pe-8 sm:last-pe-0">
      

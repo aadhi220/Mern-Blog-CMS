@@ -5,13 +5,13 @@ import { SERVER_URL } from '../../Services/serverUrl';
 
 export default function ProductCard({blog}) {
   return (
-    <Link to={`/detailPage`} state={{blogDetail:blog,viewUp:blog.views+1}}
+    <Link to={`/detailPage/${blog._id}`} state={{viewUp:blog.views+1,author:blog.username}}
     className="group flex flex-col h-full border border-gray-200 hover:border-transparent hover:shadow-lg transition-all rounded overflow-hidden duration-300   dark:border-gray-700 dark:hover:border-transparent dark:hover:shadow-black/[.4] dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
     
   >
-    <div className=" h-[16rem] flex justify-center   overflow-hidden">
+    <div className=" h-[16rem] flex justify-center  items-center  overflow-hidden">
       <img
-        className=" object-cover "
+        className=" object-cover  "
         src={`${SERVER_URL}/uploads/${blog.images[0]}`}
         alt="Image Description"
       />
@@ -35,7 +35,10 @@ export default function ProductCard({blog}) {
           <h5 className="text-sm text-gray-800 dark:text-gray-200">
             By {blog.username}
           </h5>
+
+          <span>{blog.created_at}</span>
         </div>
+        <span className='h-full ms-auto flex items-center'>{blog.views} views</span>
       </div>
   </div>
   </Link>
