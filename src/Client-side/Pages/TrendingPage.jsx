@@ -21,7 +21,10 @@ const TrendingPage = () => {
       const searchKe = "";
       const result = await getAllBlogApi(searchKe, reqHeader);
       if (result.status === 200) {
-        setAllBlogs(result.data);
+        const temp = result.data.filter((blog) => {
+          return blog.approved === true;
+        });
+        setAllBlogs(temp);
       } else {
         console.log("api error", result.message);
       }
@@ -44,11 +47,7 @@ const TrendingPage = () => {
         blog.category.toLowerCase().includes(searchKey.toLowerCase())
     )
     .filter((blog) => blog.views > 10)
-    .sort((blogA, blogB) => {
-      const dateA = new Date(blogA.created_at);
-      const dateB = new Date(blogB.created_at);
-      return dateB - dateA;
-    });
+    .sort((blogA, blogB) => blogB.views - blogA.views)
 
   // console.log(filteredBlog);
 
@@ -70,7 +69,7 @@ const TrendingPage = () => {
 
             <div className="mt-5">
               {" "}
-              <PaginationFunction />
+              {/* <PaginationFunction /> */}
             </div>
           </>
         )}

@@ -83,7 +83,10 @@ function DetailPage() {
       // console.log("search key: " + searchKey);
       const result = await getAuthorBlogApi(searchKey, reqHeader);
       if (result.status === 200) {
-        setAuthorBlogs(result.data);
+        const temp = result.data.filter((blog) => {
+          return blog.approved === true;
+        });
+        setAuthorBlogs(temp);
         //  console.log("success", result);
       } else {
         console.log("api error", result.message);

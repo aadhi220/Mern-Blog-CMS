@@ -21,8 +21,12 @@ const CommonPage = () => {
       const searchKe = "";
       const result = await getAllBlogApi(searchKe, reqHeader);
       if (result.status === 200) {
-        setAllBlogs(result.data);
-      } else {
+        const temp = result.data.filter((blog) => {
+          return blog.approved === true;
+        });
+        setAllBlogs(temp);
+      }
+       else {
         console.log("api error", result.message);
       }
     } catch (error) {

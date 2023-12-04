@@ -21,7 +21,10 @@ function Home() {
       const result = await getAllBlogApi(searchKe, reqHeader);
 
       if (result.status === 200) {
-        const blogArray = result.data;
+        const blogArray = result.data.filter((blog) => {
+          return blog.approved === true;
+        });
+        
 
         const latBlogs = blogArray
           .sort(
