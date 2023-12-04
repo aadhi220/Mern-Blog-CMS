@@ -103,22 +103,22 @@ const HandleSubmit =async (e)=>{
     if(result.status === 200) {
       toast.success("successfully added")
 
-      // try {
-      //   const reqbody ={
-      //     username:username,
-      //     title:title
-      //   }
-      //   const sentmail = await sendMailApi(reqbody)
-      //   if(sentmail.status === 200) {
-      //     console.log("email sent");
-      //   }else {
-      //     console.log("email not sent");
-      //   }
+      try {
+        const reqbody ={
+          username:username,
+          title:title
+        }
+        const sentmail = await sendMailApi(reqbody)
+        if(sentmail.status === 200) {
+          console.log("email sent");
+        }else {
+          console.log("email not sent");
+        }
        
-      // } catch (error) {
-      //   console.log(error);
+      } catch (error) {
+        console.log(error);
        
-      // }
+      }
 
 
 

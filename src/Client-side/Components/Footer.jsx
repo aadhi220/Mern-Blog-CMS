@@ -20,7 +20,8 @@ const handleSubmit = async (e)=>{
   const formattedDate = date.toLocaleString("en-US", options);
   const reqBody ={
     email : email,
-    created_at : formattedDate
+    created_at : formattedDate,
+    author : "Admin"
   }
   
 try {
