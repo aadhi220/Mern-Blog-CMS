@@ -14,7 +14,7 @@ import { useNavigate } from "react-router";
 function AddBlog() {
 
   const user = JSON.parse(sessionStorage.getItem("existingUser"));
-
+const [loading ,setLoading]=useState(false)
   const navigate= useNavigate()
 
   const options = {
@@ -64,6 +64,7 @@ function AddBlog() {
   // console.log(typeof(blogDetails.images));
 const HandleSubmit =async (e)=>{
   e.preventDefault();
+  setLoading(true);
   const {title,caption,category,images,username,userId,views,likes,created_at,content}=blogDetails;
 
   if(!title || !caption || !category || !images || !username || !userId  || !created_at ||!content) {
@@ -108,9 +109,10 @@ const HandleSubmit =async (e)=>{
         }else {
           console.log("email not sent");
         }
+       
       } catch (error) {
         console.log(error);
-        
+       
       }
 
 
@@ -127,13 +129,16 @@ const HandleSubmit =async (e)=>{
         likes:0,
         created_at:formattedDate
       })
+      setLoading(false);
       navigate("/dashboard/manageBlog")
       
     }else {
       toast.error("something went wrong")
+      setLoading(false);
       // console.log(result)
     }
   } catch (error) {
+    setLoading(false);
     console.log(error);
     
   }
@@ -238,7 +243,7 @@ useEffect(()=>{
             </div>
             <div className="w-full flex justify-center mt-3">
               <Button type="submit" className="flex-1 max-w-xs" color="blue">
-                Add
+                {loading ? <span className="loading loading-spinner loading-md"></span> : "Add"}
               </Button>
             </div>
           </form>
