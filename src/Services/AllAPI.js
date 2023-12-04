@@ -87,3 +87,12 @@ export const setViewCountApi=async(reqBody)=>{
 export const UpdateProfileApi=async(reqBody,reqHeader)=>{
     return await commonApi('PATCH',`${SERVER_URL}/users/setAuthorReq`,reqBody,reqHeader)
 }
+
+
+export const addEmailApi=async(reqBody)=>{
+    return await commonApi('POST',`${SERVER_URL}/email/add`,reqBody,"")
+}
+
+export const sendMailApi=async(reqbody)=>{
+    return await commonApi('POST',`${SERVER_URL}/email/sent`,reqbody,"")
+}

@@ -43,7 +43,7 @@ export default function ProfileMenu() {
             </Link>
           ) : (
             <Dropdown.Item onClick={() => setOpenReqModal(!openReqModal)}>
-              Author Request
+              Join RateLab
             </Dropdown.Item>
           )}
 

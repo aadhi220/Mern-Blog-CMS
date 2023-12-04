@@ -1,7 +1,46 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { addEmailApi } from '../../Services/AllAPI'
+import { toast } from 'react-toastify'
 
 export default function() {
+const [email,setEmail]=useState("")
+
+const handleSubmit = async (e)=>{
+  e.preventDefault()
+  const options = {
+    hour: "numeric",
+    minute: "numeric",
+    hour12: true,
+    month: "short",
+    day: "numeric",
+  };
+
+  const date = new Date();
+  const formattedDate = date.toLocaleString("en-US", options);
+  const reqBody ={
+    email : email,
+    created_at : formattedDate
+  }
+  
+try {
+  const result =await addEmailApi(reqBody)
+  if(result.status === 200) {
+    toast.success("successfully added your email")
+    setEmail("")
+  }else if(result.status === 406){
+    toast.error("email already exists")
+    // console.log(result)
+  }else {
+    toast.error("email already exists")
+    // console.log(result)
+  }
+} catch (error) {
+  console.log(error);
+}
+
+}
+
   return (
     <footer className="bg-gray-900 w-full mt-[10rem]">
   <div className="w-full max-w-[85rem] py-10 px-4 sm:px-6 lg:px-8 lg:pt-20 mx-auto">
@@ -90,26 +129,29 @@ export default function() {
       {/* End Col */}
       <div className="col-span-2">
         <h4 className="font-semibold text-gray-100">Stay up to date</h4>
-        <form>
+        <form onSubmit={(e)=>handleSubmit(e)} >
           <div className="mt-4 flex flex-col items-center gap-2 sm:flex-row sm:gap-3 bg-white rounded-lg p-2 dark:bg-gray-800">
             <div className="w-full">
               <label htmlFor="hero-input" className="sr-only">
-                Search
+                
               </label>
               <input
-                type="text"
+                type="email"
                 id="hero-input"
                 name="hero-input"
                 className="py-3 px-4 block w-full border-transparent rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-transparent dark:text-gray-400 dark:focus:ring-gray-600"
                 placeholder="Enter your email"
+                value={email || ""}
+                onChange={(e)=>setEmail(e.target.value)}
+
               />
             </div>
-            <a
+            <button type='submit'
               className="w-full sm:w-auto whitespace-nowrap p-3 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
               href="#"
             >
               Subscribe
-            </a>
+            </button>
           </div>
           <p className="mt-3 text-sm text-gray-400">
             

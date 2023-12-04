@@ -9,7 +9,7 @@ import {
 import React, {  useEffect, useState } from "react";
 import TextEditor from "../Components/TextEditor";
 import { toast } from "react-toastify";
-import { addBlogApi, getAllCategoryApi} from "../../Services/AllAPI";
+import { addBlogApi, getAllCategoryApi, sendMailApi} from "../../Services/AllAPI";
 import { useNavigate } from "react-router";
 function AddBlog() {
 
@@ -52,6 +52,8 @@ function AddBlog() {
       const result = await getAllCategoryApi(reqHeader)
       if (result.status === 200) {
         setCategory(result.data)
+
+        
         // console.log("category",result.data)
       }
     } catch (error) {
@@ -94,6 +96,25 @@ const HandleSubmit =async (e)=>{
     const result = await addBlogApi(reqBody,reqHeader)
     if(result.status === 200) {
       toast.success("successfully added")
+
+      try {
+        const reqbody ={
+          username:username,
+          title:title
+        }
+        const sentmail = await sendMailApi(reqbody)
+        if(sentmail.status === 200) {
+          console.log("email sent");
+        }else {
+          console.log("email not sent");
+        }
+      } catch (error) {
+        console.log(error);
+        
+      }
+
+
+
       setBlogDetails({
         title: "",
         caption: "",
