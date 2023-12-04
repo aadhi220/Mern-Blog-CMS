@@ -5,6 +5,7 @@ import { deleteCategoryApi, getAllCategoryApi } from "../../Services/AllAPI";
 import DeleteModal from "../Components/DeleteModal";
 export default function ManageCategories() {
   const [allCategories, setAllCategories] = useState([]);
+  const [loading, setLoading] = useState(true)
   const [categoryResponce, setCategoryResponce] = useState(false);
   const token = sessionStorage.getItem("token");
   const reqHeader = {
@@ -32,7 +33,7 @@ export default function ManageCategories() {
       const result = await getAllCategoryApi(reqHeader);
       if (result.status === 200) {
         setAllCategories(result.data);
-
+setLoading(false);
         // console.log(result.data);
       } else {
         // console.log("api error ",result);
@@ -46,9 +47,11 @@ export default function ManageCategories() {
     getAllCategories();
   }, [categoryResponce]);
 
+  
+
   return (
-    <div className="flex w-full h-full justify-center items-center">
-      <div className="overflow-x-auto pt-7 flex-1 max-w-7xl   ">
+      <div className="flex w-full h-full justify-center items-center">
+       {loading ?<div className="h-[80vh] flex justify-center items-center"> <span className="loading loading-spinner loading-lg"></span></div> :  <div className="overflow-x-auto pt-7 flex-1 max-w-7xl   ">
         <div className="w-full mb-5 flex  px-[1rem] items-center  gap-10">
           <h3 className="text-2xl font-semibold">Categories</h3>
           <AddCategory
@@ -95,7 +98,7 @@ export default function ManageCategories() {
               ))}
           </Table.Body>
         </Table>
-      </div>
+      </div> }
     </div>
   );
 }

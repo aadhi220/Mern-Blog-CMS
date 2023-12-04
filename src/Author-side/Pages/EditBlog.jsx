@@ -18,7 +18,7 @@ function EditBlog() {
   const { blog } = location.state || {};
 
   const navigate = useNavigate();
-
+  const user = JSON.parse(sessionStorage.getItem("existingUser"));
   const options = {
     hour: "numeric",
     minute: "numeric",
@@ -37,6 +37,7 @@ function EditBlog() {
     content: blog.content,
     created_at: "",
     blogId: blogId,
+    approved:user.isAdmin ? true : false,
   });
 
   // console.log(blogDetails);
@@ -59,9 +60,10 @@ function EditBlog() {
   // console.log(typeof(blogDetails.images));
   const HandleSubmit = async (e) => {
     e.preventDefault();
-    const { title, caption, category, images, created_at, content, blogId } =
+   
+    const { title, caption, category, images, approved, content, blogId } =
       blogDetails;
-
+     console.log(blogDetails)
     if (!title) {
       toast.warning("Please fill in all fields");
     } else {
@@ -77,8 +79,9 @@ function EditBlog() {
         reqBody.append(`images`, image);
       });
       reqBody.append("content", content);
-      reqBody.append("created_at", `Edited ${formattedDate}`);
+      reqBody.append("created_at", `${formattedDate}`);
       reqBody.append("blogId", blogId);
+      reqBody.append('approved',approved);
 
       try {
         const result = await editBlogApi(reqBody, reqHeader);

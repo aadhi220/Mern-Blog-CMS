@@ -37,7 +37,8 @@ const [loading ,setLoading]=useState(false)
     username:user.username,
     views:0,
     likes:0,
-    created_at:formattedDate
+    approved:user.isAdmin ? true : false,
+
   });
 
   // console.log(blogDetails);
@@ -65,9 +66,12 @@ const [loading ,setLoading]=useState(false)
 const HandleSubmit =async (e)=>{
   e.preventDefault();
   setLoading(true);
-  const {title,caption,category,images,username,userId,views,likes,created_at,content}=blogDetails;
+  
 
-  if(!title || !caption || !category || !images || !username || !userId  || !created_at ||!content) {
+
+  const {title,caption,category,images,username,userId,views,likes,content,approved}=blogDetails;
+
+  if(!title || !caption || !category || !images || !username || !userId  ||!content) {
     toast.warning("Please fill in all fields")
   }else {
     const reqBody = new FormData();
@@ -86,8 +90,9 @@ const HandleSubmit =async (e)=>{
     reqBody.append('userId', userId);
     reqBody.append('views', views);
     reqBody.append('likes', likes);
-    reqBody.append('created_at', created_at);
+    reqBody.append('created_at', formattedDate);
     reqBody.append('content', content);
+    reqBody.append('approved',approved);
     
 
   
@@ -98,22 +103,22 @@ const HandleSubmit =async (e)=>{
     if(result.status === 200) {
       toast.success("successfully added")
 
-      try {
-        const reqbody ={
-          username:username,
-          title:title
-        }
-        const sentmail = await sendMailApi(reqbody)
-        if(sentmail.status === 200) {
-          console.log("email sent");
-        }else {
-          console.log("email not sent");
-        }
+      // try {
+      //   const reqbody ={
+      //     username:username,
+      //     title:title
+      //   }
+      //   const sentmail = await sendMailApi(reqbody)
+      //   if(sentmail.status === 200) {
+      //     console.log("email sent");
+      //   }else {
+      //     console.log("email not sent");
+      //   }
        
-      } catch (error) {
-        console.log(error);
+      // } catch (error) {
+      //   console.log(error);
        
-      }
+      // }
 
 
 
@@ -127,7 +132,7 @@ const HandleSubmit =async (e)=>{
         username:user.username,
         views:0,
         likes:0,
-        created_at:formattedDate
+        approved:false
       })
       setLoading(false);
       navigate("/dashboard/manageBlog")

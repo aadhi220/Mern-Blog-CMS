@@ -15,6 +15,7 @@ function ManageUsers() {
   const [allUsers, setAllUsers] = useState({});
   const [userResponce, setUserResponce] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [isLoading , setIsLoading] = useState(true);
 
   const reqHeader = {
     "Content-Type": "application/json",
@@ -28,6 +29,7 @@ function ManageUsers() {
       if (result.status === 200) {
         setAllUsers(result.data);
         // console.log(result.data);
+        setIsLoading(false);
       } else {
         console.log("api error ", result);
       }
@@ -82,7 +84,7 @@ function ManageUsers() {
 
   return (
     <div className="flex w-full h-full justify-center items-center">
-      <div className="overflow-x-auto pt-7 flex-1 max-w-7xl   ">
+        {isLoading ?<div className="h-[80vh] flex justify-center items-center"> <span className="loading loading-spinner loading-lg"></span></div> : <div className="overflow-x-auto pt-7 flex-1 max-w-7xl   ">
         <div className="w-full mb-5 flex  px-[1rem] items-center  gap-10">
           <h3 className="text-2xl font-semibold">Users</h3>
         </div>
@@ -159,7 +161,7 @@ function ManageUsers() {
               ))}
           </Table.Body>
         </Table>
-      </div>
+      </div> }
     </div>
   );
 }
