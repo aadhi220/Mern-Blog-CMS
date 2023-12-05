@@ -21,7 +21,7 @@ const handleSubmit = async (e)=>{
   const reqBody ={
     email : email,
     created_at : formattedDate,
-    author : "Admin"
+    author : "all"
   }
   
 try {
