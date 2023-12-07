@@ -95,12 +95,12 @@ export default function Login() {
             />
             <Label htmlFor="pass">Show Password</Label>
           </div>
-          <Link
+          {/* <Link
             to={"/forgotPassword"}
             className="text-blue-700 hover:underline"
           >
             Forgot Password?
-          </Link>
+          </Link> */}
         </div>
         <div className="flex items-center gap-2">
           <span>Don't have an account? </span>
