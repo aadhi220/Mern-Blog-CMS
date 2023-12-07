@@ -1,10 +1,8 @@
 # RateLab - MERN Content Management System
 
-## Demo Video - https://your-demo-link-here.com
-
 ## Live link   - https://ratelab-server.onrender.com
 
-## Overview
+## Backend    - https://github.com/aadhi220/Mern-Blog-CMS-server.git
 
 **Project Name:** RateLab  
 **Project Type:** Content Management System  
