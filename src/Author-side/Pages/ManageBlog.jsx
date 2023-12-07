@@ -108,12 +108,12 @@ function ManageBlog() {
                       {blog.views}
                     </Table.Cell>
                     <Table.Cell>
-                      <a
+                      <div
                         href="#"
                         className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
                       >
                         {blog.created_at}
-                      </a>
+                      </div>
                     </Table.Cell>
 <Table.Cell className="">{blog.approved ? <div className="badge badge-accent">live</div> :
 <div className="badge badge-ghost">Pending</div>}</Table.Cell>

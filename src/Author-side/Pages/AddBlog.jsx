@@ -35,6 +35,7 @@ const [loading ,setLoading]=useState(false)
     content: "",
     userId:user._id,
     username:user.username,
+    profilePic:user.profilePic,
     views:0,
     likes:0,
     approved:user.isAdmin ? true : false,
@@ -69,7 +70,7 @@ const HandleSubmit =async (e)=>{
   
 
 
-  const {title,caption,category,images,username,userId,views,likes,content,approved}=blogDetails;
+  const {title,caption,category,images,username,userId,views,likes,content,approved,profilePic}=blogDetails;
 
   if(!title || !caption || !category || !images || !username || !userId  ||!content) {
     toast.warning("Please fill in all fields")
@@ -93,6 +94,7 @@ const HandleSubmit =async (e)=>{
     reqBody.append('created_at', formattedDate);
     reqBody.append('content', content);
     reqBody.append('approved',approved);
+    reqBody.append('profilePic',profilePic)
     
 
   
@@ -130,9 +132,11 @@ const HandleSubmit =async (e)=>{
         content: "",
         userId:user._id,
         username:user.username,
+        profilePic:"",
         views:0,
         likes:0,
-        approved:false
+        approved:false,
+   
       })
       setLoading(false);
       navigate("/dashboard/manageBlog")

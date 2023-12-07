@@ -64,10 +64,10 @@ const CommonPage = () => {
         ) : (
           <>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredBlog.length > 0 &&
+              {filteredBlog.length > 0 ?
                 filteredBlog.map((blog, index) => (
                   <ProductCard key={index} blog={blog} allBlog={filteredBlog} />
-                ))}
+                )) : <span >Nothing Here Yet!!</span>}
             </div>
 
             <div className="mt-5">

@@ -105,7 +105,7 @@ const [myBlogs, setMyBlogs] = useState([])
   return (
     <>
       <div className="w-full flex justify-center px-10 flex-col gap-4 py-10">
-      <div className="w-full "> <h1 className="text-5xl font-bold my-3 stat-value">Website Stats</h1></div>
+      {user.isAdmin &&  <div className="w-full "> <h1 className="text-5xl font-bold my-3 stat-value">Website Stats</h1></div>}
 
       {user.isAdmin &&    <div className="stats stats-vertical  sm:stats-horizontal shadow ">
           <div className="stat   flex flex-col justify-center items-center">

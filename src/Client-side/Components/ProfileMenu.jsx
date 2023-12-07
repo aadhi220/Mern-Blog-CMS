@@ -22,7 +22,7 @@ export default function ProfileMenu() {
               src={
                 user.profilePic
                   ? `${SERVER_URL}/uploads/${user?.profilePic}`
-                  : "https://images.unsplash.com/photo-1531927557220-a9e23c1e4794?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
+                  : "https://cdn3.vectorstock.com/i/1000x1000/30/97/flat-business-man-user-profile-avatar-icon-vector-4333097.jpg"
               }
               alt="Image Description"
             />

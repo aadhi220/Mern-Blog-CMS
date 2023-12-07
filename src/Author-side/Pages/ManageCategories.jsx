@@ -80,12 +80,12 @@ setLoading(false);
                     {category.category}
                   </Table.Cell>
                   <Table.Cell>
-                    <a
-                      href="#"
-                      className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
+                    <div
+                    
+                      className="font-medium "
                     >
                       {category.created_at}
-                    </a>
+                    </div>
                   </Table.Cell>
                   <Table.Cell>
                     <DeleteModal

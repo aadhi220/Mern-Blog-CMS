@@ -173,7 +173,7 @@ try {
       <div>
         <a
           className="w-10 h-10 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-white hover:bg-white/10 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:ring-1 focus:ring-gray-600"
-          href="#"
+          href="http://www.facebook.com" target='_blank'
         >
           <svg
             className="flex-shrink-0 w-4 h-4"
@@ -188,7 +188,7 @@ try {
         </a>
         <a
           className="w-10 h-10 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-white hover:bg-white/10 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:ring-1 focus:ring-gray-600"
-          href="#"
+          href="http://www.google.com" target='_blank'
         >
           <svg
             className="flex-shrink-0 w-4 h-4"
@@ -203,7 +203,7 @@ try {
         </a>
         <a
           className="w-10 h-10 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-white hover:bg-white/10 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:ring-1 focus:ring-gray-600"
-          href="#"
+          href="http://www.twitter.com" target='_blank'
         >
           <svg
             className="flex-shrink-0 w-4 h-4"
@@ -218,11 +218,11 @@ try {
         </a>
         <a
           className="w-10 h-10 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-white hover:bg-white/10 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:ring-1 focus:ring-gray-600"
-          href="#"
+          href="https://github.com/aadhi220/Mern-Blog-CMS.git" target='_blank'
         >
           <svg
             className="flex-shrink-0 w-4 h-4"
-            xmlns="http://www.w3.org/2000/svg"
+            xmlns="http://www.w3.org/2000/svg" 
             width={16}
             height={16}
             fill="currentColor"

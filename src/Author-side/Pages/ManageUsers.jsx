@@ -91,7 +91,7 @@ function ManageUsers() {
         <Table hoverable striped>
           <Table.Head>
             <Table.HeadCell>Name</Table.HeadCell>
-            <Table.HeadCell>Created_at</Table.HeadCell>
+            <Table.HeadCell>Profession</Table.HeadCell>
             <Table.HeadCell>Roll</Table.HeadCell>
             <Table.HeadCell>
               <span className="">Actions</span>
@@ -126,12 +126,12 @@ function ManageUsers() {
                     </div>
                   </Table.Cell>
                   <Table.Cell>
-                    <a
+                    <div
                       href="#"
-                      className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
+                      className="font-medium "
                     >
-                      {user?.created_at}
-                    </a>
+                      {user?.job}
+                    </div>
                   </Table.Cell>
                   <Table.Cell>
                     {user.isAdmin

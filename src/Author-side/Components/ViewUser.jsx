@@ -44,10 +44,10 @@ export default function UserView({
                 </tr>
                 <tr>
                   <td className="text-left pr-4 pb-2 font-semibold">
-                    Created At
+                    Profession
                   </td>
                   <td className="pb-2">:</td>
-                  <td className="pb-2">{user.created_at}</td>
+                  <td className="pb-2">{user.job}</td>
                 </tr>
                 <tr>
                   <td className="text-left pr-4 pb-2 font-semibold">Roll</td>

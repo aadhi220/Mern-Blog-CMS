@@ -61,10 +61,10 @@ const TrendingPage = () => {
         ) : (
           <>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {allBlogs.length > 0 &&
+              {allBlogs.length > 0 ?
                 filteredBlog.map((blog, index) => (
                   <ProductCard key={index} blog={blog} />
-                ))}
+                )): <span>Nothing Here Yet!!</span>}
             </div>
 
             <div className="mt-5">

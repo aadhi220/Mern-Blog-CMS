@@ -33,7 +33,7 @@ export default function Login() {
           });
           navigate("/");
         } else {
-          toast.error("user not found");
+          toast.error("invalid cretentials");
           // console.log(result);
         }
       } catch (error) {
@@ -65,7 +65,7 @@ export default function Login() {
             id="email4"
             type="email"
             icon={HiMail}
-            placeholder="name@gmail.com"
+            placeholder="admin@gmail.com , author eg: vijay@gmail.com"
             value={userData.email || ""}
             onChange={(e) =>
               setUserData({ ...userData, email: e.target.value })
@@ -75,11 +75,12 @@ export default function Login() {
         </div>
         <div>
           <div className="mb-2 block">
-            <Label htmlFor="password1" value="Your password" />
+            <Label htmlFor="password1"  value="Your password" />
           </div>
           <TextInput
             id="password1"
             type={showPassword ? "text" : "password"}
+            placeholder="Admin123 , Vijay123"
             value={userData.password || ""}
             onChange={(e) =>
               setUserData({ ...userData, password: e.target.value })
