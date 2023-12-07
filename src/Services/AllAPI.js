@@ -96,3 +96,11 @@ export const addEmailApi=async(reqBody)=>{
 export const sendMailApi=async(reqbody)=>{
     return await commonApi('POST',`${SERVER_URL}/email/sent`,reqbody,"")
 }
+
+export const getAllSubscribersApi=async(reqHeader)=>{
+    return await commonApi('GET',`${SERVER_URL  }/subscriber/get`,"",reqHeader)
+}
+
+export const forgotPasswordApi=async(email)=>{
+    return await commonApi('POST',`${SERVER_URL}/email/forgot`,email,"")
+}

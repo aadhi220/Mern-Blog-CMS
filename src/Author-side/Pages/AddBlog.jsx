@@ -248,7 +248,7 @@ useEffect(()=>{
             </div>
             <div className="w-full flex justify-center mt-3">
               <Button type="submit" className="flex-1 max-w-xs" color="blue">
-                {loading ? <span className="loading loading-spinner loading-md"></span> : "Add"}
+                {loading ? <span className="loading loading-spinner loading-md"></span> : user.isAdmin ? "Publish" : "Submit"}
               </Button>
             </div>
           </form>

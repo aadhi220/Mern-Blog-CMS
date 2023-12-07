@@ -16,7 +16,7 @@ function EditBlog() {
   const location = useLocation();
   const { blogId } = useParams();
   const { blog } = location.state || {};
-
+  const [loading ,setLoading]=useState(false)
   const navigate = useNavigate();
   const user = JSON.parse(sessionStorage.getItem("existingUser"));
   const options = {
@@ -60,12 +60,13 @@ function EditBlog() {
   // console.log(typeof(blogDetails.images));
   const HandleSubmit = async (e) => {
     e.preventDefault();
-   
+   setLoading(true)
     const { title, caption, category, images, approved, content, blogId } =
       blogDetails;
      console.log(blogDetails)
-    if (!title) {
+    if (!title ||!caption || !category || !content) {
       toast.warning("Please fill in all fields");
+      setLoading(false);
     } else {
       const reqBody = new FormData();
       reqBody.append("title", title);
@@ -87,6 +88,7 @@ function EditBlog() {
         const result = await editBlogApi(reqBody, reqHeader);
         if (result.status === 200) {
           toast.success("successfully Edited");
+          setLoading(false);
           setBlogDetails({
             title: "",
             caption: "",
@@ -100,9 +102,11 @@ function EditBlog() {
         } else {
           toast.error("something went wrong");
           // console.log(result)
+          setLoading(false);
         }
       } catch (error) {
         console.log(error);
+        setLoading(false);
       }
     }
   };
@@ -229,7 +233,7 @@ function EditBlog() {
             </div>
             <div className="w-full flex justify-center mt-3">
               <Button type="submit" className="flex-1 max-w-xs" color="blue">
-                Done
+              {loading ? <span className="loading loading-spinner loading-md"></span> : user.isAdmin ? "Publish" : "Submit"}
               </Button>
             </div>
           </form>
