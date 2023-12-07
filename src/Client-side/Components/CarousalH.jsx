@@ -8,7 +8,7 @@ export default function CarouselH({ topBlogs }) {
 
   return (
     <div className="h-56 sm:h-64 xl:h-80 2xl:h-[33rem] relative">
-      <Carousel leftControl="left" rightControl="right" className="">
+      <Carousel leftControl="" rightControl="" className="">
         {topBlogs &&
           topBlogs?.map((blog, index) => (
             <Fragment key={index}>
