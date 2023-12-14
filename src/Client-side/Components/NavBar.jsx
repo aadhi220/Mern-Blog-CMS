@@ -70,12 +70,12 @@ function NavBarSecond({ reqHeader }) {
               key={index}
               className="snap-center shrink-0 pe-5 sm:pe-8 sm:last-pe-0"
             >
-              <div
+              <button
                 onClick={() => handleCategory(menu.category)}
-                className="inline-flex items-center gap-x-2 hover:text-gray-500 dark:text-gray-400 dark:hover:text-gray-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                className="inline-flex items-center gap-x-2 hover:text-gray-500 dark:text-gray-400 dark:hover:text-gray-500 focus:underline "
               >
                 {menu.category}
-              </div>
+              </button>
             </div>
           ))}
       </div>
