@@ -3,6 +3,7 @@
 ## Live link   - https://ratelab-server.onrender.com
 
 ## Backend    - https://github.com/aadhi220/Mern-Blog-CMS-server.git
+## Demo video    - https://youtu.be/S8lEzEZzfl0
 
 **Project Name:** RateLab  
 **Project Type:** Content Management System  
