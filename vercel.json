@@ -7,7 +7,7 @@
     },
     {
       "src": "src/**/*.jsx",
-      "use": "build",
+      "use": "@vercel/static-build",
       "config": {
         "distDir": "dist/client"
       }
@@ -20,15 +20,15 @@
     },
     {
       "src": "^/static/(.*)",
-      "dest": "/src/static/$1"
+      "dest": "/dist/client/static/$1"
     },
     {
       "src": "/(.*)\\.png",
-      "dest": "/src/$1.png"
+      "dest": "/dist/client/$1.png"
     },
     {
       "src": "/(.*)",
-      "dest": "/src/index.html"
+      "dest": "/dist/client/index.html"
     }
   ]
 }
