@@ -1,34 +1,3 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "src/**/*.jsx",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "dist/client"
-      }
-    },
-    {
-      "src": "src/**/*",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/src/api/$1"
-    },
-    {
-      "src": "^/static/(.*)",
-      "dest": "/dist/client/static/$1"
-    },
-    {
-      "src": "/(.*)\\.png",
-      "dest": "/dist/client/$1.png"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/dist/client/index.html"
-    }
-  ]
+  "rewrites": [{ "source": "/(.*)", "destination": "/" }]
 }
