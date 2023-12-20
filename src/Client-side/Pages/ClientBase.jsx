@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from 'react'
+import React, { useEffect,useState,useContext } from 'react'
 import Header from '../Components/Header'
 import Footer from '../Components/Footer'
 import { Routes,Route, Navigate } from 'react-router-dom'
@@ -6,6 +6,8 @@ import Home from './Home'
 import TrendingPage from './TrendingPage'
 import CommonPage from './CommonPage'
 import DetailPage from './DetailPage'
+import { globalUseContext } from '../../ContextApi/GlobalContext'
+import PageNoteFound from '../../PageNoteFound'
 function ClientBase() {
   const [showButton, setShowButton] = useState(false);
 const tokenl=sessionStorage.getItem('token')
@@ -20,11 +22,7 @@ const tokenl=sessionStorage.getItem('token')
     }
   };
 
-  const backToTop = () => {
-    document.documentElement.style.scrollBehavior = "smooth";
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-  };
+
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -33,14 +31,18 @@ const tokenl=sessionStorage.getItem('token')
     };
   }, []);
 
+  const {PleaseLogin,backToTop}=useContext(globalUseContext)
+
   return (
     <div className=' relative'>
     <Header/>
 <Routes>
+<Route path='/*' element={<PageNoteFound/>}/>
 <Route path='/' element={<Home/>}/>
-<Route path='/trending' element={tokenl? <TrendingPage/> : <Navigate to="/login" replace />}/>
-<Route path='/all' element={tokenl? <CommonPage/> : <Navigate to="/login" replace />}/>
-<Route path='/detailPage/:blogId' element={tokenl ? <DetailPage/> : <Navigate to="/login" replace />}/>
+<Route path='/trending' element={tokenl? <TrendingPage/> :<PleaseLogin/>}/>
+<Route path='/all' element={tokenl? <CommonPage/> :<PleaseLogin/>}/>
+<Route path='/detailPage/:blogId' element={tokenl ? <DetailPage/> :<PleaseLogin/>}/>
+
 
 
 

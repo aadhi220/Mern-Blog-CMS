@@ -1,17 +1,20 @@
-import React from "react";
+import React, { useContext} from "react";
 import "./App.css";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate} from "react-router-dom";
 import ClientBase from "./Client-side/Pages/ClientBase";
 import AuthorBase from "./Author-side/Pages/AuthorBase";
 import Login from "./Auth/Login";
 import Register from "./Auth/Register";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+// import ForgotPass from "./Auth/ForgotPass";
+import { globalUseContext } from "./ContextApi/GlobalContext";
 
-import ForgotPass from "./Auth/ForgotPass";
+
 
 function App() {
-  // const {isdark}=useContext(globalUseContext)
+  const token = sessionStorage.getItem("token");
+  const {PleaseLogin}=useContext(globalUseContext)
 
   // useEffect(() => {
   //   localStorage.setItem('isdark', JSON.stringify(isdark));
@@ -24,15 +27,24 @@ function App() {
           {/* client side  */}
           <Route path="*" element={<ClientBase />} />
 
-          <Route path="/dashboard/*" element={<AuthorBase />} />
+          <Route
+            path="/dashboard/*"
+            element={token ? <AuthorBase /> : <PleaseLogin />}
+          />
 
           <Route
             path="/AuthorDashboard"
-            element={<Navigate to="/dashboard/home" replace />}
+            element={
+              token ? (
+                <Navigate to="/dashboard/home" replace />
+              ) : (
+                <PleaseLogin />
+              )
+            }
           />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/forgotPassword" element={<ForgotPass />} />
+          {/* <Route path="/forgotPassword" element={<ForgotPass />} /> */}
         </Routes>
 
         <ToastContainer
