@@ -5,13 +5,15 @@ import { useState } from 'react';
 import { addEmailApi } from '../../Services/AllAPI';
 import { toast } from 'react-toastify'; // Assuming you have toast notifications configured
 
+
 export default function Follow({ author }) {
+  const user = JSON.parse(sessionStorage.getItem("existingUser"));
   const [openModal, setOpenModal] = useState(false);
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState(user.email);
 
   function onCloseModal() {
     setOpenModal(false);
-    setEmail('');
+
   }
 
   const handleSubmit = async (e) => {
@@ -32,6 +34,7 @@ export default function Follow({ author }) {
       email: email,
       created_at: formattedDate,
       author: author,
+      userId:user._id
     };
 console.log("aut",author);
     try {
@@ -39,12 +42,16 @@ console.log("aut",author);
 
       if (result.status === 200) {
         toast.success('Successfully subscribed! You will receive updates.');
-        setEmail('');
-        onCloseModal(); // Close the modal after successful subscription
-      } else if (result.status === 406) {
-        toast.error('Email already exists. Please use a different email.');
-      } else {
-        toast.error('An error occurred. Please try again later.');
+
+        user.subscribed.push(author);
+
+        sessionStorage.setItem("existingUser", JSON.stringify(user));
+  
+        onCloseModal(); 
+      } 
+      else {
+        toast.warning(result.response.data);
+        console.log();
       }
     } catch (error) {
       console.error(error);
@@ -59,7 +66,7 @@ console.log("aut",author);
         type="button"
         className="py-1.5 px-2.5 inline-flex items-center gap-x-2 text-xs font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
       >
-        <svg
+      {!user?.subscribed.includes(author) ?<>  <svg
           className="flex-shrink-0 w-4 h-4"
           xmlns="http://www.w3.org/2000/svg"
           width={24}
@@ -75,8 +82,8 @@ console.log("aut",author);
           <circle cx={9} cy={7} r={4} />
           <line x1={19} x2={19} y1={8} y2={14} />
           <line x1={22} x2={16} y1={11} y2={11} />
-        </svg>
-        Follow
+        </svg> follow</> :"followed" }
+       
       </button>
       <Modal show={openModal} size="md" onClose={onCloseModal} popup>
         <Modal.Header />
@@ -103,6 +110,7 @@ console.log("aut",author);
           </div>
         </Modal.Body>
       </Modal>
+      
     </>
   );
 }

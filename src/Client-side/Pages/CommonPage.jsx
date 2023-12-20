@@ -7,7 +7,7 @@ import { globalUseContext } from "../../ContextApi/GlobalContext";
 const CommonPage = () => {
   const [loading, setLoading] = useState(true);
   const [allBlogs, setAllBlogs] = useState([]);
-  const { searchKey } = useContext(globalUseContext);
+  const { searchKey, backToTop } = useContext(globalUseContext);
   const token = "";
 
   const reqHeader = {
@@ -38,6 +38,7 @@ const CommonPage = () => {
 
   useEffect(() => {
     // console.log("render");
+    backToTop()
     getAllBlogs();
   }, [searchKey]);
 

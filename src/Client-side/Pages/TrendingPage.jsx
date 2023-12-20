@@ -7,7 +7,7 @@ import { globalUseContext } from "../../ContextApi/GlobalContext";
 const TrendingPage = () => {
   const [loading, setLoading] = useState(true);
   const [allBlogs, setAllBlogs] = useState([]);
-  const { searchKey } = useContext(globalUseContext);
+  const { searchKey , backToTop } = useContext(globalUseContext);
   const token = "";
 
   const reqHeader = {
@@ -37,6 +37,7 @@ const TrendingPage = () => {
 
   useEffect(() => {
     // console.log("render");
+    backToTop()
     getAllBlogs();
   }, [searchKey]);
 

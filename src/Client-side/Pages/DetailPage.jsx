@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import { Link, useParams } from "react-router-dom";
 import CarousalBlog from "../Components/CarousalBlog";
@@ -10,7 +10,10 @@ import {
 } from "../../Services/AllAPI";
 import { SERVER_URL } from "../../Services/serverUrl";
 import Follow from "../Components/Follow";
+import { globalUseContext } from "../../ContextApi/GlobalContext";
+
 function DetailPage() {
+  const { backToTop } = useContext(globalUseContext);
   const location = useLocation();
   const { blogId } = useParams();
   const { viewUp, author, authorId } = location.state || {};
@@ -100,7 +103,7 @@ function DetailPage() {
   };
   useEffect(() => {
     // console.log("render");
-
+    backToTop()
     getBlogById();
     getAuthorById();
     getAuthorBlogs();
@@ -210,7 +213,7 @@ function DetailPage() {
                 </a>
                 <div className="grow">
                   <div className="flex justify-end">
-              <Follow author={authorDetails.username}/>
+                    <Follow author={authorDetails.username} />
                   </div>
                 </div>
               </div>
