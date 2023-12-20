@@ -29,17 +29,17 @@ function App() {
 
           <Route
             path="/dashboard/*"
-            element={token ? <AuthorBase /> : <PleaseLogin />}
+            element={ <AuthorBase /> }
           />
 
           <Route
             path="/AuthorDashboard"
             element={
-              token ? (
+              
                 <Navigate to="/dashboard/home" replace />
-              ) : (
-                <PleaseLogin />
-              )
+         
+             
+             
             }
           />
           <Route path="/login" element={<Login />} />
